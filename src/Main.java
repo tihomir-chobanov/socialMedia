@@ -3,10 +3,7 @@ import users.AbstractUser;
 import users.Administrator;
 import users.Moderator;
 
-import java.util.AbstractList;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -39,9 +36,12 @@ public class Main {
             int ageFromInput = Integer.parseInt(inputSplitter[3]);
                 switch (command) {
                     case "add_moderator":
+                        // if inputSplitter[1].equals("Admin) .... else Not authorized for this
                         System.out.println("Moderator is added!");
                         Moderator moderator = new Moderator(nameFromInput, ageFromInput);
                         // add moderator to List<AbstractUser>
+                        socialMedia.getUsers().add(moderator);
+                        socialMedia.infoAboutUsers();
                         break;
                     case "add_user":
                         System.out.println("User is added");

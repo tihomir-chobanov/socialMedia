@@ -4,7 +4,6 @@ import socialMedia.SocialMedia;
 
 public class AbstractUser {
 
-
     String nickname;
     int age;
     SocialMedia socialMedia;

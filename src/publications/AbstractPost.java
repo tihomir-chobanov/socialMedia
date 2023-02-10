@@ -1,33 +1,18 @@
 package publications;
 
+import lombok.Getter;
+import lombok.Setter;
+import users.AbstractUser;
+@Getter
+@Setter
 public class AbstractPost {
 
     String content;
     int id;
 
-
-
-
-
-
-
-
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
+    public AbstractPost(String content, int id) {
         this.content = content;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
         this.id = id;
     }
-
 
 }
