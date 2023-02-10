@@ -41,13 +41,15 @@ public class Main {
                         Moderator moderator = new Moderator(nameFromInput, ageFromInput);
                         // add moderator to List<AbstractUser>
                         socialMedia.getUsers().add(moderator);
-                        socialMedia.infoAboutUsers();
+                        //socialMedia.infoAboutUsers();
                         break;
                     case "add_user":
                         System.out.println("User is added");
                         break;
                     case "quit":
                         return;
+                    case "remove user":
+                        socialMedia.getUsers();
                 }
 
         }

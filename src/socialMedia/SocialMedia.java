@@ -28,7 +28,8 @@ public class SocialMedia {
 
     public void infoAboutUsers() {
         for (int i = 0; i < users.size(); i++) {
-            System.out.println("User #" + i + ": " + users.get(i).getNickname() + ", " + users.get(i).getAge() + "");
+            int number = i + 1;
+            System.out.println("User #" + number + ": " + users.get(i).getNickname() + ", " + users.get(i).getAge() + "");
         }
     }
 
