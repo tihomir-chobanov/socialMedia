@@ -1,44 +1,22 @@
 package users;
-
+import lombok.Getter;
+import lombok.Setter;
 import socialMedia.SocialMedia;
-
+@Getter
+@Setter
 public class AbstractUser {
 
+    String role;
     String nickname;
     int age;
     SocialMedia socialMedia;
 
 
 
-    public AbstractUser(String nickname, int age) {
+    public AbstractUser(String role, String nickname, int age) {
+        this.role = role;
         this.nickname = nickname;
         this.age = age;
     }
-
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public SocialMedia getSocialMedia() {
-        return socialMedia;
-    }
-
-    public void setSocialMedia(SocialMedia socialMedia) {
-        this.socialMedia = socialMedia;
-    }
-
 
 }
