@@ -21,27 +21,41 @@ public class SocialMedia {
     // private List<String> userNicknames = new ArrayList<>();
 
 
-    public void changeNickname(String newNickname) {
+    public void changeNickname(String nickName, String newNickname) {
+        boolean isUserToChangeInUsers = false;
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getNickname().equals(nickName)) {
+                isUserToChangeInUsers = true;
+                break;
+            }
+        }
         boolean isNewNicknameUnique = true;
         for (AbstractUser user : users) {
             if (user.getNickname().equals(newNickname)) {
                 isNewNicknameUnique = false;
-                System.out.println("The nickname is already used in this socialMedia.");
                 break;
             }
         }
-        if (isNewNicknameUnique) {
+        if (!isUserToChangeInUsers) {
+            System.out.println("The user is not in this socialMedia");
+        }
+        if (!isNewNicknameUnique) {
+            System.out.println("The nickname is already used in this socialMedia.");
+        }
+
+        if (isUserToChangeInUsers && isNewNicknameUnique) {
             for (AbstractUser user : users) {
-                if (user.getNickname().equals("Kolio")) {
+                if (user.getNickname().equals(nickName)) {
                     user.setNickname(newNickname);
                 }
             }
             for (UserPost userPost : userPosts) {
-                if (userPost.getNickname().equals("Kolio"))
+                if (userPost.getNickname().equals(nickName))
                     userPost.setNickname(newNickname);
             }
             System.out.println("Nickname changed in users and userPosts");
         }
+
     }
 
     public void getNumberRoleNameAndAgeAboutUsers() {

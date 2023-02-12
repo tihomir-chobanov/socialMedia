@@ -44,13 +44,10 @@ public class Main {
 
         //remove_user code
 
-
-
-
-
         //     Admin add_moderator John 50
         //     Admin add_user Vasil 30
         //     Admin remove_user Vasil
+        //     Vasil rename Azis
 
 
         while (true) {
@@ -93,9 +90,10 @@ public class Main {
                     }
 
                 case "rename":
-                    //.................
+                    String userToChange = inputSplitter[0];
+                    String newNickname = inputSplitter[2];
+                    socialMedia.changeNickname(userToChange, newNickname);
                     break;
-
                 case "quit":
                     return;
 
