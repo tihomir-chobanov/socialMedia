@@ -18,13 +18,23 @@ public class SocialMedia {
     private List<AbstractUser> users = new ArrayList<>();
     private List<UserPost> userPosts = new ArrayList<>();
 
-    // private List<String> userNicknames = new ArrayList<>();
+    public boolean isUserInList(String user, SocialMedia socialMedia) {
+        boolean isUserInList = false;
+        for (int i = 0; i < socialMedia.getUsers().size(); i++) {
+            if (socialMedia.getUsers().get(i).getNickname().equals(user)) {
+                isUserInList = true;
+                break;
+            }
+        }
+        return isUserInList;
+    }
 
-
-    public void changeNickname(String nickName, String newNickname) {
+    public void changeNickname(String[] inputSplitter) {
+        String userToChange = inputSplitter[0];
+        String newNickname = inputSplitter[2];
         boolean isUserToChangeInUsers = false;
         for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).getNickname().equals(nickName)) {
+            if (users.get(i).getNickname().equals(userToChange)) {
                 isUserToChangeInUsers = true;
                 break;
             }
@@ -45,12 +55,12 @@ public class SocialMedia {
 
         if (isUserToChangeInUsers && isNewNicknameUnique) {
             for (AbstractUser user : users) {
-                if (user.getNickname().equals(nickName)) {
+                if (user.getNickname().equals(userToChange)) {
                     user.setNickname(newNickname);
                 }
             }
             for (UserPost userPost : userPosts) {
-                if (userPost.getNickname().equals(nickName))
+                if (userPost.getNickname().equals(userToChange))
                     userPost.setNickname(newNickname);
             }
             System.out.println("Nickname changed in users and userPosts");
