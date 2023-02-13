@@ -29,16 +29,7 @@ public class SocialMedia {
         return isUserInList;
     }
 
-    public void changeNickname(String[] inputSplitter) {
-        String userToChange = inputSplitter[0];
-        String newNickname = inputSplitter[2];
-        boolean isUserToChangeInUsers = false;
-        for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).getNickname().equals(userToChange)) {
-                isUserToChangeInUsers = true;
-                break;
-            }
-        }
+    public boolean isUserUnique(String newNickname, SocialMedia socialMedia) {
         boolean isNewNicknameUnique = true;
         for (AbstractUser user : users) {
             if (user.getNickname().equals(newNickname)) {
@@ -46,26 +37,46 @@ public class SocialMedia {
                 break;
             }
         }
+        return isNewNicknameUnique;
+    }
+
+
+    public void changeNickname(SocialMedia socialMedia, String[] inputSplitter) {
+        String userToChange = inputSplitter[0];
+        String newNickname = inputSplitter[2];
+
+        boolean isUserToChangeInUsers = socialMedia.isUserInList(userToChange, socialMedia);
+        boolean isNewNickNameUnique =  socialMedia.isUserUnique(newNickname, socialMedia);
+
+
         if (!isUserToChangeInUsers) {
             System.out.println("The user is not in this socialMedia");
         }
-        if (!isNewNicknameUnique) {
+        if (!isNewNickNameUnique) {
             System.out.println("The nickname is already used in this socialMedia.");
         }
 
-        if (isUserToChangeInUsers && isNewNicknameUnique) {
-            for (AbstractUser user : users) {
-                if (user.getNickname().equals(userToChange)) {
-                    user.setNickname(newNickname);
-                }
-            }
-            for (UserPost userPost : userPosts) {
-                if (userPost.getNickname().equals(userToChange))
-                    userPost.setNickname(newNickname);
-            }
+        if (isUserToChangeInUsers && isNewNickNameUnique) {
+            changeNicknameInUsers(userToChange, newNickname);
+            changeNicknameInUserPosts(userToChange, newNickname);
             System.out.println("Nickname changed in users and userPosts");
         }
 
+    }
+
+    private void changeNicknameInUserPosts(String userToChange, String newNickname) {
+        for (UserPost userPost : userPosts) {
+            if (userPost.getNickname().equals(userToChange))
+                userPost.setNickname(newNickname);
+        }
+    }
+
+    private void changeNicknameInUsers(String userToChange, String newNickname) {
+        for (AbstractUser user : users) {
+            if (user.getNickname().equals(userToChange)) {
+                user.setNickname(newNickname);
+            }
+        }
     }
 
     public void getNumberRoleNameAndAgeAboutUsers() {

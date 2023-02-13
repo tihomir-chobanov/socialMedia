@@ -50,7 +50,7 @@ public class Main {
                     socialMedia.getAdministrator().removeUser(socialMedia, inputSplitter);
                     break;
                 case "rename":
-                    socialMedia.changeNickname(inputSplitter);
+                    socialMedia.changeNickname(socialMedia ,inputSplitter);
                     break;
                 case "quit":
                     return;
@@ -62,10 +62,6 @@ public class Main {
 
         }
 
-
-    }
-
-    private static void removeUser(SocialMedia socialMedia, String[] inputSplitter) {
 
     }
 
