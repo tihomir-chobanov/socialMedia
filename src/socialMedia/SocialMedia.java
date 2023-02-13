@@ -14,14 +14,14 @@ import java.util.List;
 @Setter
 public class SocialMedia {
 
-    private Administrator administrator;
+    private Administrator administrator = new Administrator("Administrator", "Admin", 50);
     private List<AbstractUser> users = new ArrayList<>();
     private List<UserPost> userPosts = new ArrayList<>();
 
-    public boolean isUserInList(String user, SocialMedia socialMedia) {
+    public boolean isUserInList(String name) {
         boolean isUserInList = false;
-        for (int i = 0; i < socialMedia.getUsers().size(); i++) {
-            if (socialMedia.getUsers().get(i).getNickname().equals(user)) {
+        for (AbstractUser user: users) {
+            if (user.getNickname().equals(name)) {
                 isUserInList = true;
                 break;
             }
@@ -29,7 +29,7 @@ public class SocialMedia {
         return isUserInList;
     }
 
-    public boolean isUserUnique(String newNickname, SocialMedia socialMedia) {
+    public boolean isUserUnique(String newNickname) {
         boolean isNewNicknameUnique = true;
         for (AbstractUser user : users) {
             if (user.getNickname().equals(newNickname)) {
@@ -45,9 +45,8 @@ public class SocialMedia {
         String userToChange = inputSplitter[0];
         String newNickname = inputSplitter[2];
 
-        boolean isUserToChangeInUsers = socialMedia.isUserInList(userToChange, socialMedia);
-        boolean isNewNickNameUnique =  socialMedia.isUserUnique(newNickname, socialMedia);
-
+        boolean isUserToChangeInUsers = socialMedia.isUserInList(userToChange);
+        boolean isNewNickNameUnique =  socialMedia.isUserUnique(newNickname);
 
         if (!isUserToChangeInUsers) {
             System.out.println("The user is not in this socialMedia");
@@ -87,8 +86,8 @@ public class SocialMedia {
     }
 
     public void getNicknameContentAndIdAboutPost() {
-        for (int i = 0; i < userPosts.size(); i++) {
-            System.out.println(userPosts.get(i).getNickname() + " " + userPosts.get(i).getContent() + " " + userPosts.get(i).getId());
+        for (UserPost userPost : userPosts) {
+            System.out.println(userPost.getNickname() + " " + userPost.getContent() + " " + userPost.getId());
         }
     }
 

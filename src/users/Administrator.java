@@ -12,7 +12,7 @@ public class Administrator extends Moderator {
     }
 
         public void addModerator(SocialMedia socialMedia, String[] inputSplitter) {
-            if (inputSplitter[0].equals("Admin")) {
+            if (inputSplitter[0].equals(socialMedia.getAdministrator().getNickname())) {
                 String nameFromInput = inputSplitter[2];
                 int ageFromInput = Integer.parseInt(inputSplitter[3]);
                 Moderator m = new Moderator("Moderator", nameFromInput, ageFromInput);
@@ -20,12 +20,12 @@ public class Administrator extends Moderator {
                 System.out.println("Moderator is added!");
                 socialMedia.getNumberRoleNameAndAgeAboutUsers();
             } else {
-                System.out.println("You are not admin");
+                System.out.println("You are not admin.");
             }
         }
 
     public void addRegular(SocialMedia socialMedia, String[] inputSplitter) {
-        if (inputSplitter[0].equals("Admin")) {
+        if (inputSplitter[0].equals(socialMedia.getAdministrator().getNickname())) {
             String nameFromInput = inputSplitter[2];
             int ageFromInput = Integer.parseInt(inputSplitter[3]);
             Moderator m = new Moderator("Regular", nameFromInput, ageFromInput);
@@ -33,21 +33,23 @@ public class Administrator extends Moderator {
             System.out.println("Regular is added!");
             socialMedia.getNumberRoleNameAndAgeAboutUsers();
         } else {
-            System.out.println("You are not admin");
+            System.out.println("You are not admin.");
         }
     }
 
 
     public void removeUser(SocialMedia socialMedia, String[] inputSplitter) {
-        if (inputSplitter[0].equals("Admin")) {
+        if (inputSplitter[0].equals(socialMedia.getAdministrator().getNickname())) {
             String userToRemove = inputSplitter[2];
-            socialMedia.isUserInList(userToRemove, socialMedia);
-            if (socialMedia.isUserInList(userToRemove, socialMedia)) {
+            socialMedia.isUserInList(userToRemove);
+            if (socialMedia.isUserInList(userToRemove)) {
                 removeFromUsers(socialMedia, userToRemove);
                 removeFromUserPosts(socialMedia, userToRemove);
+            } else {
+                System.out.println("User is not in this socialMedia.");
             }
         } else {
-            System.out.println("You are not admin");
+            System.out.println("You are not admin.");
         }
     }
 

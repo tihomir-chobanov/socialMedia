@@ -26,8 +26,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         SocialMedia socialMedia = new SocialMedia();
-        socialMedia.setAdministrator(new Administrator("Administrator", "Admin", 50));
-        socialMedia.infoAboutAdmin();
+        socialMedia.getUsers().add(socialMedia.getAdministrator());
 
         //     Admin add_moderator John 50
         //     Admin add_user Vasil 30
