@@ -8,13 +8,12 @@ import lombok.Setter;
 public class UserPost {
     private String nickname;
     private String content;
-    private int id;
+    public int id;
 
-    public UserPost(String nickname, String content, int id) {
+    public UserPost(String nickname, String content) {
         this.nickname = nickname;
         this.content = content;
-        this.id = id;
+        this.id = PostIdGenerator.generateId();
     }
-
 
 }

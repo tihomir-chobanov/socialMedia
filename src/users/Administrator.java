@@ -28,8 +28,8 @@ public class Administrator extends Moderator {
         if (inputSplitter[0].equals(socialMedia.getAdministrator().getNickname())) {
             String nameFromInput = inputSplitter[2];
             int ageFromInput = Integer.parseInt(inputSplitter[3]);
-            Moderator m = new Moderator("Regular", nameFromInput, ageFromInput);
-            socialMedia.getUsers().add(m);
+            Regular r = new Regular("Regular", nameFromInput, ageFromInput);
+            socialMedia.getUsers().add(r);
             System.out.println("Regular is added!");
             socialMedia.getNumberRoleNameAndAgeAboutUsers();
         } else {
