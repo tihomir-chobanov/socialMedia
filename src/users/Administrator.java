@@ -18,7 +18,7 @@ public class Administrator extends Moderator {
                 Moderator m = new Moderator("Moderator", nameFromInput, ageFromInput);
                 socialMedia.getUsers().add(m);
                 System.out.println("Moderator is added!");
-                socialMedia.getNumberRoleNameAndAgeAboutUsers();
+                socialMedia.getNumberRoleNameAgeAndBlockAboutUsers();
             } else {
                 System.out.println("You are not admin.");
             }
@@ -31,7 +31,7 @@ public class Administrator extends Moderator {
             Regular r = new Regular("Regular", nameFromInput, ageFromInput);
             socialMedia.getUsers().add(r);
             System.out.println("Regular is added!");
-            socialMedia.getNumberRoleNameAndAgeAboutUsers();
+            socialMedia.getNumberRoleNameAgeAndBlockAboutUsers();
         } else {
             System.out.println("You are not admin.");
         }
@@ -66,7 +66,7 @@ public class Administrator extends Moderator {
         for (int i = 0; i < socialMedia.getUsers().size(); i++) {
             if (socialMedia.getUsers().get(i).getNickname().equals(userToRemove)) {
                 socialMedia.getUsers().remove(socialMedia.getUsers().get(i));
-                socialMedia.getNumberRoleNameAndAgeAboutUsers();
+                socialMedia.getNumberRoleNameAgeAndBlockAboutUsers();
             }
         }
     }

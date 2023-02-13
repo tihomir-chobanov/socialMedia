@@ -78,10 +78,10 @@ public class SocialMedia {
         }
     }
 
-    public void getNumberRoleNameAndAgeAboutUsers() {
+    public void getNumberRoleNameAgeAndBlockAboutUsers() {
         int number = 1;
         for (AbstractUser user : users) {
-            System.out.println("User #" + number++ + ": " + user.getRole() + " " + user.getNickname() + " " + user.getAge());
+            System.out.println("User #" + number++ + ": " + user.getRole() + " " + user.getNickname() + " " + user.getAge() + " " +user.isBlocked());
         }
     }
 

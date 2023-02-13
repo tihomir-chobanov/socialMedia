@@ -32,6 +32,7 @@ public class Main {
         //     Admin add_user Vasil 30
         //     Admin remove_user Vasil
         //     Vasil rename Azis
+        //     John block Vasil
 
 
         while (true) {
@@ -50,6 +51,9 @@ public class Main {
                     break;
                 case "rename":
                     socialMedia.changeNickname(socialMedia ,inputSplitter);
+                    break;
+                case "block":
+                    Moderator.blockUser(socialMedia, inputSplitter);
                     break;
                 case "quit":
                     return;

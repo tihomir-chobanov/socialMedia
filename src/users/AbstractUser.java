@@ -10,7 +10,7 @@ public class AbstractUser {
     String nickname;
     int age;
     SocialMedia socialMedia;
-
+    boolean blocked;
 
 
     public AbstractUser(String role, String nickname, int age) {
