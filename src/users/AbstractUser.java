@@ -2,15 +2,22 @@ package users;
 import lombok.Getter;
 import lombok.Setter;
 import socialMedia.SocialMedia;
+import userPost.UserPost;
+
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
-public class AbstractUser {
+public abstract class AbstractUser {
+//make all private
+    private String role;
+    private String nickname;
+    private int age;
+    private SocialMedia socialMedia;
+    private boolean blocked;
 
-    String role;
-    String nickname;
-    int age;
-    SocialMedia socialMedia;
-    boolean blocked;
+    private List<UserPost> posts = new ArrayList<>();
 
 
     public AbstractUser(String role, String nickname, int age) {

@@ -20,7 +20,7 @@ public class Main {
 	    Kiril post [text] Hello, world!
 	    Kiril remove_post 8
 	    Kiril view_post 10
-	    Ivan view_all_posts Kiril
+	    Ivan view_all_posts Kolio
          */
 
         Scanner scanner = new Scanner(System.in);
@@ -28,11 +28,28 @@ public class Main {
         SocialMedia socialMedia = new SocialMedia();
         socialMedia.getUsers().add(socialMedia.getAdministrator());
 
+        /*UserPost kolioPost1 = new UserPost("Kolio", "http:/abv.bg");
+        UserPost kolioPost2 = new UserPost("Kolio", "http:/abc.com");
+        UserPost ivanPost = new UserPost("Ivan", "http:/arena.bg");
+        socialMedia.getUserPosts().add(kolioPost1);
+        socialMedia.getUserPosts().add(kolioPost2);
+        socialMedia.getUserPosts().add(ivanPost);
+        // Factory pattern for add_moderator
+        socialMedia.getNicknameContentAndIdAboutPost();
+        for (int i = 0; i < socialMedia.getUsers().size(); i++) {
+            if(socialMedia.getUsers().get(i).getNickname().equals("Kolio")) {
+                socialMedia.getUsers().get(i).getPosts().add(kolioPost1);
+            }
+        }*/
+
+        //CommandHandler - remove methoda v nov klas, kakto i drugite metodi i te v novi klasove;
+        //BuilderPattern / Factory pattern;
+
         //     Admin add_moderator John 50
         //     Admin add_user Vasil 30
         //     Admin remove_user Vasil
-        //     Vasil rename Azis
-        //     John block Vasil
+        //     John rename Ivan
+        //     Ivan block Vasil
 
 
         while (true) {
@@ -54,6 +71,9 @@ public class Main {
                     break;
                 case "block":
                     Moderator.blockUser(socialMedia, inputSplitter);
+                    break;
+                case "unblock":
+                    Moderator.unblockUser(socialMedia, inputSplitter);
                     break;
                 case "quit":
                     return;

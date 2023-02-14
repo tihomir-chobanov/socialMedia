@@ -16,6 +16,9 @@ public class SocialMedia {
 
     private Administrator administrator = new Administrator("Administrator", "Admin", 50);
     private List<AbstractUser> users = new ArrayList<>();
+
+    //get userByNickname(String nickname) fori (users) return Optional isPresent  <AbstractUser>
+
     private List<UserPost> userPosts = new ArrayList<>();
 
     public boolean isUserInList(String name) {
@@ -59,6 +62,7 @@ public class SocialMedia {
             changeNicknameInUsers(userToChange, newNickname);
             changeNicknameInUserPosts(userToChange, newNickname);
             System.out.println("Nickname changed in users and userPosts");
+            socialMedia.getNumberRoleNameAgeAndBlockAboutUsers();
         }
 
     }

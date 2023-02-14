@@ -6,8 +6,6 @@ import lombok.Setter;
 @Setter
 public class Regular extends AbstractUser {
 
-    boolean blocked;
-
     public Regular(String role, String nickname, int age) {
         super(role, nickname, age);
     }

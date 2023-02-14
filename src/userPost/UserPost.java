@@ -8,7 +8,7 @@ import lombok.Setter;
 public class UserPost {
     private String nickname;
     private String content;
-    public int id;
+    private int id;
 
     public UserPost(String nickname, String content) {
         this.nickname = nickname;
