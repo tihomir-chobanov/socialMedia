@@ -3,9 +3,11 @@ import lombok.Getter;
 import lombok.Setter;
 import socialMedia.SocialMedia;
 import userPost.UserPost;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import static users.Moderator.getIndexOfUser;
+
 
 @Getter
 @Setter
@@ -50,17 +52,20 @@ public abstract class AbstractUser {
         String postType = inputSplitter[2];
         String postContent = inputSplitter[3];
         boolean isUserInList = socialMedia.isUserInList(user);
+        int indexOfUser = getIndexOfUser(socialMedia, user);
 
-
-        if (!isUserInList) {
-            System.out.println("User is not in this socialMedia");
+        if (isUserInList) {
+            if (!socialMedia.getUsers().get(indexOfUser).isBlocked()) {
+                UserPost post = new UserPost(user, postType, postContent);
+                socialMedia.getUserPosts().add(post);
+                System.out.println("post is added in the List and PersonalPostList!");
+                socialMedia.getNicknameTypeContentAndIdAboutPost();
+                socialMedia.getUserByNickname(socialMedia, user).getPersonalPostsList().add(post);
+            } else {
+                System.out.println("User is blocked");
+            }
         } else {
-            // chech if user is blocked
-            UserPost post = new UserPost(user, postType, postContent);
-            socialMedia.getUserPosts().add(post);
-            System.out.println("post is added in the List and PersonalPostList!");
-            socialMedia.getNicknameTypeContentAndIdAboutPost();
-            socialMedia.getUserByNickname(socialMedia, user).getPersonalPostsList().add(post);
+            System.out.println("User is not in this socialMedia");
         }
     }
 

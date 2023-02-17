@@ -18,8 +18,8 @@ public class Moderator extends Regular {
         boolean isBlockerInList = socialMedia.isUserInList(blocker);
         boolean isBlockedInList = socialMedia.isUserInList(blocked);
 
-        int indexOfBlockerUser = getIndexOfBlockerUser(socialMedia, blocker);
-        int indexOfBlockedUser = getIndexOfBlockedUser(socialMedia, blocked);
+        int indexOfBlockerUser = getIndexOfUser(socialMedia, blocker);
+        int indexOfBlockedUser = getIndexOfUser(socialMedia, blocked);
 
         if (!isBlockerInList || !isBlockedInList) {
             System.out.println("User is not in this socialMedia");
@@ -39,8 +39,8 @@ public class Moderator extends Regular {
         boolean isBlockerInList = socialMedia.isUserInList(blocker);
         boolean isBlockedInList = socialMedia.isUserInList(blocked);
 
-        int indexOfBlockerUser = getIndexOfBlockerUser(socialMedia, blocker);
-        int indexOfBlockedUser = getIndexOfBlockedUser(socialMedia, blocked);
+        int indexOfBlockerUser = getIndexOfUser(socialMedia, blocker);
+        int indexOfBlockedUser = getIndexOfUser(socialMedia, blocked);
 
         if (!isBlockerInList || !isBlockedInList) {
             System.out.println("User is not in this socialMedia");
@@ -54,25 +54,16 @@ public class Moderator extends Regular {
         }
     }
 
-    private static int getIndexOfBlockerUser(SocialMedia socialMedia, String blocker) {
-        int indexOfBlockerUser = 0;
+    public static int getIndexOfUser(SocialMedia socialMedia, String user) {
+        int indexOfUser = 0;
         for (int i = 0; i < socialMedia.getUsers().size(); i++) {
-            if (socialMedia.getUsers().get(i).getNickname().equals(blocker)) {
-                indexOfBlockerUser = i;
+            if (socialMedia.getUsers().get(i).getNickname().equals(user)) {
+                indexOfUser = i;
             }
         }
-        return indexOfBlockerUser;
+        return indexOfUser;
     }
 
-    private static int getIndexOfBlockedUser(SocialMedia socialMedia, String blocked) {
-        int indexOfBlockedUser = 0;
-        for (int i = 0; i < socialMedia.getUsers().size(); i++) {
-            if (socialMedia.getUsers().get(i).getNickname().equals(blocked)) {
-                indexOfBlockedUser = i;
-            }
-        }
-        return indexOfBlockedUser;
-    }
 
 
 }
