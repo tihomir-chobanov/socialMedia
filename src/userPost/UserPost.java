@@ -1,5 +1,4 @@
 package userPost;
-
 import lombok.Getter;
 import lombok.Setter;
 

@@ -1,5 +1,4 @@
 package users;
-
 import lombok.Getter;
 import lombok.Setter;
 import socialMedia.SocialMedia;

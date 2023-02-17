@@ -23,7 +23,7 @@ public class Administrator extends Moderator {
                 System.out.println("You are not admin.");
             }
         }
-
+    // addRegular format
     public void addRegular(SocialMedia socialMedia, String[] inputSplitter) {
         if (inputSplitter[0].equals(socialMedia.getAdministrator().getNickname())) {
             String nameFromInput = inputSplitter[2];

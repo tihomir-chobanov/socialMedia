@@ -1,14 +1,11 @@
 package socialMedia;
-
 import lombok.Getter;
 import lombok.Setter;
 import userPost.UserPost;
 import users.AbstractUser;
 import users.Administrator;
-
 import java.util.ArrayList;
 import java.util.List;
-
 
 @Getter
 @Setter
@@ -105,10 +102,5 @@ public class SocialMedia {
             System.out.println(userPost.getNickname() + " " + userPost.getPostType() + " " + userPost.getContent() + " " + userPost.getId());
         }
     }
-
-    public void infoAboutAdmin() {
-        System.out.println("Admin " + administrator.getNickname() + ", " + administrator.getAge() + " created!");
-    }
-
 
 }

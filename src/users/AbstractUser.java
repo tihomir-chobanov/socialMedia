@@ -5,14 +5,12 @@ import socialMedia.SocialMedia;
 import userPost.UserPost;
 import java.util.ArrayList;
 import java.util.List;
-
 import static users.Moderator.getIndexOfUser;
-
 
 @Getter
 @Setter
 public abstract class AbstractUser {
-//make all private
+
     private String role;
     private String nickname;
     private int age;
@@ -26,7 +24,6 @@ public abstract class AbstractUser {
         this.nickname = nickname;
         this.age = age;
     }
-
 
     public static void viewAllPostsByUser(SocialMedia socialMedia, String[] inputSplitter) {
         String actor = inputSplitter[0];
