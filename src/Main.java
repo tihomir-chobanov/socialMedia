@@ -1,7 +1,5 @@
 import socialMedia.SocialMedia;
-import userPost.UserPost;
 import users.AbstractUser;
-import users.Administrator;
 import users.Moderator;
 import users.Regular;
 
@@ -28,20 +26,6 @@ public class Main {
         SocialMedia socialMedia = new SocialMedia();
         socialMedia.getUsers().add(socialMedia.getAdministrator());
 
-        /*UserPost kolioPost1 = new UserPost("Kolio", "http:/abv.bg");
-        UserPost kolioPost2 = new UserPost("Kolio", "http:/abc.com");
-        UserPost ivanPost = new UserPost("Ivan", "http:/arena.bg");
-        socialMedia.getUserPosts().add(kolioPost1);
-        socialMedia.getUserPosts().add(kolioPost2);
-        socialMedia.getUserPosts().add(ivanPost);
-        // Factory pattern for add_moderator
-        socialMedia.getNicknameContentAndIdAboutPost();
-        for (int i = 0; i < socialMedia.getUsers().size(); i++) {
-            if(socialMedia.getUsers().get(i).getNickname().equals("Kolio")) {
-                socialMedia.getUsers().get(i).getPosts().add(kolioPost1);
-            }
-        }*/
-
         //CommandHandler - remove methoda v nov klas, kakto i drugite metodi i te v novi klasove;
         //BuilderPattern / Factory pattern;
 
@@ -50,44 +34,28 @@ public class Main {
         //     Admin remove_user Vasil
         //     John rename Ivan
         //     Ivan block Vasil
-
+        //     Vasil post image /home/kiril/img/hello.png
+        //     John view_post 2
 
         while (true) {
             String input = getUserInput(scanner);
             String[] inputSplitter = splitTheInput(input);
             String command = inputSplitter[1];
             switch (command) {
-                case "add_moderator":
-                    socialMedia.getAdministrator().addModerator(socialMedia, inputSplitter);
-                    break;
-                case "add_user":
-                    socialMedia.getAdministrator().addRegular(socialMedia, inputSplitter);
-                    break;
-                case "remove_user":
-                    socialMedia.getAdministrator().removeUser(socialMedia, inputSplitter);
-                    break;
-                case "rename":
-                    socialMedia.changeNickname(socialMedia ,inputSplitter);
-                    break;
-                case "block":
-                    Moderator.blockUser(socialMedia, inputSplitter);
-                    break;
-                case "unblock":
-                    Moderator.unblockUser(socialMedia, inputSplitter);
-                    break;
-                case "quit":
-                    return;
-
-
-
-
+                case "add_moderator" -> socialMedia.getAdministrator().addModerator(socialMedia, inputSplitter);
+                case "add_user" -> socialMedia.getAdministrator().addRegular(socialMedia, inputSplitter);
+                case "remove_user" -> socialMedia.getAdministrator().removeUser(socialMedia, inputSplitter);
+                case "rename" -> socialMedia.changeNickname(socialMedia, inputSplitter);
+                case "block" -> Moderator.blockUser(socialMedia, inputSplitter);
+                case "unblock" -> Moderator.unblockUser(socialMedia, inputSplitter);
+                case "post" -> Regular.addPost(socialMedia, inputSplitter);
+                case "view_post" -> Regular.viewPost(socialMedia, inputSplitter);
+                case "view_all_post" -> AbstractUser.viewAllPostsByUser(socialMedia, inputSplitter);
             }
-
         }
 
 
     }
-
 
     private static String[] splitTheInput(String input) {
         return input.split(" ");

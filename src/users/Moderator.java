@@ -54,11 +54,6 @@ public class Moderator extends Regular {
         }
     }
 
-
-
-
-
-
     private static int getIndexOfBlockerUser(SocialMedia socialMedia, String blocker) {
         int indexOfBlockerUser = 0;
         for (int i = 0; i < socialMedia.getUsers().size(); i++) {

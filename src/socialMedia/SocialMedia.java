@@ -16,10 +16,20 @@ public class SocialMedia {
 
     private Administrator administrator = new Administrator("Administrator", "Admin", 50);
     private List<AbstractUser> users = new ArrayList<>();
-
-    //get userByNickname(String nickname) fori (users) return Optional isPresent  <AbstractUser>
-
     private List<UserPost> userPosts = new ArrayList<>();
+
+    public AbstractUser getUserByNickname(SocialMedia socialMedia, String nickname) {
+        int indexOfUser = 100;
+        for (int i = 0; i < socialMedia.getUsers().size(); i++) {
+            if (socialMedia.getUsers().get(i).getNickname().equals(nickname)) {
+                indexOfUser = i;
+            }
+        }
+        if (indexOfUser == 100) {
+            System.out.println("The is no such user!");
+        }
+        return socialMedia.getUsers().get(indexOfUser);
+    }
 
     public boolean isUserInList(String name) {
         boolean isUserInList = false;
@@ -89,9 +99,9 @@ public class SocialMedia {
         }
     }
 
-    public void getNicknameContentAndIdAboutPost() {
+    public void getNicknameTypeContentAndIdAboutPost() {
         for (UserPost userPost : userPosts) {
-            System.out.println(userPost.getNickname() + " " + userPost.getContent() + " " + userPost.getId());
+            System.out.println(userPost.getNickname() + " " + userPost.getPostType() + " " + userPost.getContent() + " " + userPost.getId());
         }
     }
 

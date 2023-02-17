@@ -56,8 +56,9 @@ public class Administrator extends Moderator {
     private static void removeFromUserPosts(SocialMedia socialMedia, String userToRemove) {
         for (int i = 0; i < socialMedia.getUserPosts().size(); i++) {
             if (socialMedia.getUserPosts().get(i).getNickname().equals(userToRemove)) {
+                // pri dva posta trie samo purviq
                 socialMedia.getUserPosts().remove(socialMedia.getUserPosts().get(i));
-                socialMedia.getNicknameContentAndIdAboutPost();
+                socialMedia.getNicknameTypeContentAndIdAboutPost();
             }
         }
     }

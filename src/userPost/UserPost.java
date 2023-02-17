@@ -10,9 +10,12 @@ public class UserPost {
     private String content;
     private int id;
 
-    public UserPost(String nickname, String content) {
+    private String postType;
+
+    public UserPost(String nickname, String postType, String content) {
         this.nickname = nickname;
         this.content = content;
+        this.postType = postType;
         this.id = PostIdGenerator.generateId();
     }
 
