@@ -1,4 +1,5 @@
 package users;
+
 import lombok.Getter;
 import lombok.Setter;
 import socialMedia.SocialMedia;
@@ -13,18 +14,20 @@ public class Regular extends AbstractUser {
 
     public static void viewPost(SocialMedia socialMedia, String[] inputSplitter) {
         String actor = inputSplitter[0];
+        boolean isActorInList = socialMedia.isUserInList(actor);
         int postNumber = Integer.parseInt(inputSplitter[2]);
 
-        boolean isActorInList = socialMedia.isUserInList(actor);
-
-        if (!isActorInList) {
-            System.out.println("User is not in this socialMedia");
-        } else {
+        if (isActorInList) {
+            boolean isPostNumberInList = false;
             for (int i = 0; i < socialMedia.getUserPosts().size(); i++) {
                 if (socialMedia.getUserPosts().get(i).getId() == postNumber) {
+                    isPostNumberInList = true;
                     viewPostById(socialMedia, i);
                 }
             }
+            if (!isPostNumberInList) System.out.println("No such post in collection!");
+        } else {
+            System.out.println("User is not in this socialMedia");
         }
     }
 

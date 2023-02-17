@@ -27,13 +27,21 @@ public abstract class AbstractUser {
 
 
     public static void viewAllPostsByUser(SocialMedia socialMedia, String[] inputSplitter) {
-        String user = inputSplitter[2];
-        for (AbstractUser u : socialMedia.getUsers()) {
-            if (u.getNickname().equals(user)) {
-                for (UserPost p : u.getPersonalPostsList()) {
-                    System.out.println(p.getNickname() + " " + p.getContent() + " " + p.getId());
+        String actor = inputSplitter[0];
+        String searchedUser = inputSplitter[2];
+        boolean isActorInList = socialMedia.isUserInList(actor);
+        boolean isSearchedUserInList = socialMedia.isUserInList(searchedUser);
+
+        if (isActorInList && isSearchedUserInList ) {
+            for (AbstractUser u : socialMedia.getUsers()) {
+                if (u.getNickname().equals(searchedUser)) {
+                    for (UserPost p : u.getPersonalPostsList()) {
+                        System.out.println(p.getNickname() + " " + p.getContent() + " " + p.getId());
+                    }
                 }
             }
+        } else {
+            System.out.println("User is not in this socialMedia.");
         }
     }
 

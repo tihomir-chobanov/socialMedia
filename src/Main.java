@@ -50,7 +50,7 @@ public class Main {
                 case "unblock" -> Moderator.unblockUser(socialMedia, inputSplitter);
                 case "post" -> Regular.addPost(socialMedia, inputSplitter);
                 case "view_post" -> Regular.viewPost(socialMedia, inputSplitter);
-                case "view_all_post" -> AbstractUser.viewAllPostsByUser(socialMedia, inputSplitter);
+                case "view_all_posts" -> AbstractUser.viewAllPostsByUser(socialMedia, inputSplitter);
             }
         }
 
