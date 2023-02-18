@@ -58,9 +58,10 @@ public class Moderator extends Regular {
 
     public static int getIndexOfUser(SocialMedia socialMedia, String user) {
         int indexOfUser = 0;
-        for (int i = 0; i < socialMedia.getUsers().size(); i++) {
-            if (socialMedia.getUsers().get(i).getNickname().equals(user)) {
-                indexOfUser = i;
+        for (AbstractUser u : socialMedia.getUsers()) {
+            if (u.getNickname().equals(user)) {
+                indexOfUser = socialMedia.getUsers().indexOf(u);
+                break;
             }
         }
         return indexOfUser;

@@ -45,8 +45,10 @@ public class Main {
             } else {
                 String command = inputSplitter[1];
                 switch (command) {
-                    case "add_moderator" -> socialMedia.getAdministrator().addModerator(socialMedia, inputSplitter);
-                    case "add_user" -> socialMedia.getAdministrator().addRegular(socialMedia, inputSplitter);
+                    // case "add_moderator" -> socialMedia.getAdministrator().addModerator(socialMedia, inputSplitter);
+                    // case "add_user" -> socialMedia.getAdministrator().addRegular(socialMedia, inputSplitter);
+                    case "add_moderator" -> socialMedia.getAdministrator().addUser(socialMedia, inputSplitter, command);
+                    case "add_user" -> socialMedia.getAdministrator().addUser(socialMedia, inputSplitter, command);
                     case "remove_user" -> socialMedia.getAdministrator().removeUser(socialMedia, inputSplitter);
                     case "rename" -> socialMedia.changeNickname(socialMedia, inputSplitter);
                     case "block" -> Moderator.blockUser(socialMedia, inputSplitter);
