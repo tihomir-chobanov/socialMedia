@@ -2,6 +2,7 @@ package users;
 import lombok.Getter;
 import lombok.Setter;
 import socialMedia.SocialMedia;
+import util.Constants;
 
 @Getter
 @Setter
@@ -22,13 +23,13 @@ public class Moderator extends Regular {
         int indexOfBlockedUser = getIndexOfUser(socialMedia, blocked);
 
         if (!isBlockerInList || !isBlockedInList) {
-            System.out.println("User is not in this socialMedia");
+            System.out.println(Constants.USER_UNKNOWN);
         } else {
             if (socialMedia.getUsers().get(indexOfBlockerUser).getRole().equals("Moderator") || socialMedia.getUsers().get(indexOfBlockerUser).getRole().equals("Administrator")) {
                 socialMedia.getUsers().get(indexOfBlockedUser).setBlocked(true);
                 socialMedia.getNumberRoleNameAgeAndBlockAboutUsers();
             } else {
-                System.out.println("Regular users are not authorized to block other users.");
+                System.out.println(Constants.BLOCK_FORBIDDEN_FOR_REGULARS);
             }
         }
     }
@@ -43,13 +44,14 @@ public class Moderator extends Regular {
         int indexOfBlockedUser = getIndexOfUser(socialMedia, blocked);
 
         if (!isBlockerInList || !isBlockedInList) {
-            System.out.println("User is not in this socialMedia");
+            System.out.println(Constants.USER_UNKNOWN);
         } else {
             if (socialMedia.getUsers().get(indexOfBlockerUser).getRole().equals("Moderator") || socialMedia.getUsers().get(indexOfBlockerUser).getRole().equals("Administrator")) {
                 socialMedia.getUsers().get(indexOfBlockedUser).setBlocked(false);
                 socialMedia.getNumberRoleNameAgeAndBlockAboutUsers();
+                System.out.println(Constants.USER_IS_BLOCKED);
             } else {
-                System.out.println("Regular users are not authorized to block other users.");
+                System.out.println(Constants.BLOCK_FORBIDDEN_FOR_REGULARS);
             }
         }
     }

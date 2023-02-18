@@ -4,6 +4,8 @@ import lombok.Setter;
 import userPost.UserPost;
 import users.AbstractUser;
 import users.Administrator;
+import util.Constants;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +25,7 @@ public class SocialMedia {
             }
         }
         if (indexOfUser == 100) {
-            System.out.println("The is no such user!");
+            System.out.println(Constants.USER_UNKNOWN);
         }
         return socialMedia.getUsers().get(indexOfUser);
     }
@@ -59,16 +61,16 @@ public class SocialMedia {
         boolean isNewNickNameUnique =  socialMedia.isUserUnique(newNickname);
 
         if (!isUserToChangeInUsers) {
-            System.out.println("The user is not in this socialMedia");
+            System.out.println(Constants.USER_UNKNOWN);
         }
         if (!isNewNickNameUnique) {
-            System.out.println("The nickname is already used in this socialMedia.");
+            System.out.println(Constants.NICKNAME_IS_USED);
         }
 
         if (isUserToChangeInUsers && isNewNickNameUnique) {
             changeNicknameInUsers(userToChange, newNickname);
             changeNicknameInUserPosts(userToChange, newNickname);
-            System.out.println("Nickname changed in users and userPosts");
+            System.out.println(Constants.NICKNAME_IS_CHANGED);
             socialMedia.getNumberRoleNameAgeAndBlockAboutUsers();
         }
 

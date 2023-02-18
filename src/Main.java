@@ -56,10 +56,7 @@ public class Main {
                     case "view_all_posts" -> AbstractUser.viewAllPostsByUser(socialMedia, inputSplitter);
                 }
             }
-
         }
-
-
     }
 
     private static String[] splitTheInput(String input) {

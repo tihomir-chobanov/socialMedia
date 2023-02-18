@@ -2,6 +2,7 @@ package users;
 import lombok.Getter;
 import lombok.Setter;
 import socialMedia.SocialMedia;
+import util.Constants;
 
 @Getter
 @Setter
@@ -24,9 +25,9 @@ public class Regular extends AbstractUser {
                     viewPostById(socialMedia, i);
                 }
             }
-            if (!isPostNumberInList) System.out.println("No such post in collection!");
+            if (!isPostNumberInList) System.out.println(Constants.POST_IS_MISSING);
         } else {
-            System.out.println("User is not in this socialMedia");
+            System.out.println(Constants.USER_UNKNOWN);
         }
     }
 
