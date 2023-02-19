@@ -36,4 +36,23 @@ public class Regular extends AbstractUser {
     }
 
 
+    public static void removePost(SocialMedia socialMedia, String[] inputSplitter) {
+        String actor = inputSplitter[0];
+        boolean isActorInList = socialMedia.isUserInList(actor);
+        int postNumber = Integer.parseInt(inputSplitter[2]);
+
+        if (isActorInList) {
+            boolean isPostNumberInList = false;
+            for (int i = 0; i < socialMedia.getUserPosts().size(); i++) {
+                if (socialMedia.getUserPosts().get(i).getId() == postNumber) {
+                    isPostNumberInList = true;
+                    socialMedia.getUserPosts().remove(socialMedia.getUserPosts().get(i));
+                    System.out.println(Constants.POST_IS_REMOVED);
+                }
+            }
+            if (!isPostNumberInList) System.out.println(Constants.POST_IS_MISSING);
+        } else {
+            System.out.println(Constants.USER_UNKNOWN);
+        }
+    }
 }

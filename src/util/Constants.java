@@ -15,5 +15,5 @@ public class Constants {
     public static final String POST_IS_MISSING = "This post is missing in socialMedia!";
     public static final String NICKNAME_IS_USED = "The nickname is already used in this socialMedia!";
     public static final String NICKNAME_IS_CHANGED = "Nickname changed in users and userPosts!";
-
+    public static final String POST_IS_REMOVED = "Post is removed!";
 }
