@@ -2,10 +2,7 @@ package users;
 import lombok.Getter;
 import lombok.Setter;
 import socialMedia.SocialMedia;
-import userPost.UserPost;
 import util.Constants;
-
-import java.util.Iterator;
 
 @Getter
 @Setter
@@ -16,21 +13,22 @@ public class Administrator extends Moderator {
     }
 
     public void addUser(SocialMedia socialMedia, String[] inputSplitter, String userType) {
-        if (inputSplitter[0].equals(socialMedia.getAdministrator().getNickname())) {
+        String actor = inputSplitter[0];
+        if (actor.equals(socialMedia.getAdministrator().getNickname())) {
             String nameFromInput = inputSplitter[2];
             int ageFromInput = Integer.parseInt(inputSplitter[3]);
             AbstractUser user = null;
             if (userType.equals("add_moderator")) {
                 user = new Moderator("Moderator", nameFromInput, ageFromInput);
-                System.out.println(Constants.MODERATOR_IS_ADDED);
+                System.out.println(nameFromInput + " created.");
             } else if (userType.equals("add_user")) {
                 user = new Regular("Regular", nameFromInput, ageFromInput);
-                System.out.println(Constants.REGULAR_IS_ADDED);
+                System.out.println(nameFromInput + " created.");
             }
             socialMedia.getUsers().add(user);
             socialMedia.getNumberRoleNameAgeAndBlockAboutUsers();
         } else {
-            System.out.println(Constants.YOU_ARE_NOT_AN_ADMIN);
+            System.out.println("No such user: " + actor + "!");
         }
     }
 
@@ -57,6 +55,7 @@ public class Administrator extends Moderator {
 
     private static void removeFromUsers(SocialMedia socialMedia, String userToRemove) {
         socialMedia.getUsers().removeIf(user -> user.getNickname().equals(userToRemove));
+        System.out.println(userToRemove + " removed.");
         System.out.println(Constants.USERLIST_AFTER_REMOVING);
         socialMedia.getNumberRoleNameAgeAndBlockAboutUsers();
     }

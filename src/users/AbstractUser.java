@@ -38,6 +38,7 @@ public abstract class AbstractUser {
         if (isActorInList && isSearchedUserInList ) {
             for (AbstractUser u : socialMedia.getUsers()) {
                 if (u.getNickname().equals(searchedUser)) {
+                    System.out.println("HTML view for all " + searchedUser + "'s posts created.");
                     for (UserPost p : u.getPersonalPostsList()) {
                         System.out.println(p.getNickname() + " " + p.getContent() + " " + p.getId());
                     }
@@ -59,11 +60,11 @@ public abstract class AbstractUser {
             if (!socialMedia.getUsers().get(indexOfUser).isBlocked()) {
                 UserPost post = new UserPost(user, postType, postContent);
                 socialMedia.getUserPosts().add(post);
-                System.out.println(Constants.POST_IS_ADDED_IN_LIST_AND_PERSONALPOSTSLIST);
+                System.out.println("Post " + post.getId() + " created.");
                 socialMedia.getNicknameTypeContentAndIdAboutPost();
                 socialMedia.getUserByNickname(socialMedia, user).getPersonalPostsList().add(post);
             } else {
-                System.out.println(Constants.USER_IS_BLOCKED);
+                System.out.println("Post not created - user blocked!");
             }
         } else {
             System.out.println(Constants.USER_UNKNOWN);

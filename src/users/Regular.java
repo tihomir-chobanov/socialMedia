@@ -32,6 +32,8 @@ public class Regular extends AbstractUser {
     }
 
     private static void viewPostById(SocialMedia socialMedia, int i) {
+        int postId = i + 1;
+        System.out.println("HTML view for post " + postId + " created.");
         System.out.println(socialMedia.getUserPosts().get(i).getNickname() + " " + socialMedia.getUserPosts().get(i).getContent() + " " + socialMedia.getUserPosts().get(i).getId());
     }
 

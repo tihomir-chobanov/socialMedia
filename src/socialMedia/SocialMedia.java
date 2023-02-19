@@ -67,7 +67,7 @@ public class SocialMedia {
         if (isUserToChangeInUsers && isNewNickNameUnique) {
             changeNicknameInUsers(userToChange, newNickname);
             changeNicknameInUserPosts(userToChange, newNickname);
-            System.out.println(Constants.NICKNAME_IS_CHANGED);
+            System.out.println("User " + userToChange + " is now known as " + newNickname + ".");
             socialMedia.getNumberRoleNameAgeAndBlockAboutUsers();
         }
     }

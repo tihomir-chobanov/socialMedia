@@ -28,7 +28,7 @@ public class Moderator extends Regular {
             if (socialMedia.getUsers().get(indexOfBlockerUser).getRole().equals("Moderator")
                     || socialMedia.getUsers().get(indexOfBlockerUser).getRole().equals("Administrator")) {
                 socialMedia.getUsers().get(indexOfBlockedUser).setBlocked(true);
-                System.out.println(Constants.USER_IS_BLOCKED);
+                System.out.println(socialMedia.getUsers().get(indexOfBlockedUser).getNickname() + " blocked.");
                 socialMedia.getNumberRoleNameAgeAndBlockAboutUsers();
             } else {
                 System.out.println(Constants.BLOCK_FORBIDDEN_FOR_REGULARS);
