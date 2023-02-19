@@ -18,13 +18,16 @@ public class SocialMedia {
     private List<UserPost> userPosts = new ArrayList<>();
 
     public AbstractUser getUserByNickname(SocialMedia socialMedia, String nickname) {
-        int indexOfUser = 100;
-        for (int i = 0; i < socialMedia.getUsers().size(); i++) {
-            if (socialMedia.getUsers().get(i).getNickname().equals(nickname)) {
+        int indexOfUser = -1;
+        int i = 0;
+        for (AbstractUser user : socialMedia.getUsers()) {
+            if (user.getNickname().equals(nickname)) {
                 indexOfUser = i;
+                break;
             }
+            i++;
         }
-        if (indexOfUser == 100) {
+        if (indexOfUser == -1) {
             System.out.println(Constants.USER_UNKNOWN);
         }
         return socialMedia.getUsers().get(indexOfUser);
@@ -52,20 +55,14 @@ public class SocialMedia {
         return isNewNicknameUnique;
     }
 
-
     public void changeNickname(SocialMedia socialMedia, String[] inputSplitter) {
         String userToChange = inputSplitter[0];
         String newNickname = inputSplitter[2];
-
         boolean isUserToChangeInUsers = socialMedia.isUserInList(userToChange);
         boolean isNewNickNameUnique =  socialMedia.isUserUnique(newNickname);
 
-        if (!isUserToChangeInUsers) {
-            System.out.println(Constants.USER_UNKNOWN);
-        }
-        if (!isNewNickNameUnique) {
-            System.out.println(Constants.NICKNAME_IS_USED);
-        }
+        if (!isUserToChangeInUsers) System.out.println(Constants.USER_UNKNOWN);
+        if (!isNewNickNameUnique) System.out.println(Constants.NICKNAME_IS_USED);
 
         if (isUserToChangeInUsers && isNewNickNameUnique) {
             changeNicknameInUsers(userToChange, newNickname);
@@ -73,7 +70,6 @@ public class SocialMedia {
             System.out.println(Constants.NICKNAME_IS_CHANGED);
             socialMedia.getNumberRoleNameAgeAndBlockAboutUsers();
         }
-
     }
 
     private void changeNicknameInUserPosts(String userToChange, String newNickname) {
@@ -92,10 +88,9 @@ public class SocialMedia {
     }
 
     public void getNumberRoleNameAgeAndBlockAboutUsers() {
-
         int number = 1;
         for (AbstractUser user : users) {
-            System.out.println("User #" + number++ + ": " + user.getRole() + " " + user.getNickname() + " " + user.getAge() + " " +user.isBlocked());
+            System.out.println("User #" + number++ + ": " + user.getRole() + " " + user.getNickname() + " " + user.getAge() + " " + user.isBlocked());
         }
     }
 

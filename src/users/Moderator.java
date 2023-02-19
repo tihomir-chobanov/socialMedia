@@ -25,8 +25,10 @@ public class Moderator extends Regular {
         if (!isBlockerInList || !isBlockedInList) {
             System.out.println(Constants.USER_UNKNOWN);
         } else {
-            if (socialMedia.getUsers().get(indexOfBlockerUser).getRole().equals("Moderator") || socialMedia.getUsers().get(indexOfBlockerUser).getRole().equals("Administrator")) {
+            if (socialMedia.getUsers().get(indexOfBlockerUser).getRole().equals("Moderator")
+                    || socialMedia.getUsers().get(indexOfBlockerUser).getRole().equals("Administrator")) {
                 socialMedia.getUsers().get(indexOfBlockedUser).setBlocked(true);
+                System.out.println(Constants.USER_IS_BLOCKED);
                 socialMedia.getNumberRoleNameAgeAndBlockAboutUsers();
             } else {
                 System.out.println(Constants.BLOCK_FORBIDDEN_FOR_REGULARS);
@@ -46,10 +48,11 @@ public class Moderator extends Regular {
         if (!isBlockerInList || !isBlockedInList) {
             System.out.println(Constants.USER_UNKNOWN);
         } else {
-            if (socialMedia.getUsers().get(indexOfBlockerUser).getRole().equals("Moderator") || socialMedia.getUsers().get(indexOfBlockerUser).getRole().equals("Administrator")) {
+            if (socialMedia.getUsers().get(indexOfBlockerUser).getRole().equals("Moderator")
+                    || socialMedia.getUsers().get(indexOfBlockerUser).getRole().equals("Administrator")) {
                 socialMedia.getUsers().get(indexOfBlockedUser).setBlocked(false);
+                System.out.println(Constants.USER_IS_UNBLOCKED);
                 socialMedia.getNumberRoleNameAgeAndBlockAboutUsers();
-                System.out.println(Constants.USER_IS_BLOCKED);
             } else {
                 System.out.println(Constants.BLOCK_FORBIDDEN_FOR_REGULARS);
             }
