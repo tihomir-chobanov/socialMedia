@@ -3,10 +3,11 @@ import users.AbstractUser;
 import users.Moderator;
 import users.Regular;
 
+import java.io.IOException;
 import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         /*
         Admin add_moderator John 50
         Admin add_user Ivan 30
@@ -36,6 +37,8 @@ public class Main {
         //     Ivan block Vasil
         //     Vasil post image /home/kiril/img/hello.png
         //     John view_post 2
+        //     Vasil post url https://github.com/tihomir-chobanov gitAccount
+        //     John post image C:\\socialMediaPhotos\\spices-cooking.jpg
 
         while (true) {
             String input = getUserInput(scanner);

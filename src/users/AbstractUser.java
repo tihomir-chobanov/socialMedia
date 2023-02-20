@@ -59,6 +59,9 @@ public abstract class AbstractUser {
         if (isUserInList) {
             if (!socialMedia.getUsers().get(indexOfUser).isBlocked()) {
                 UserPost post = new UserPost(user, postType, postContent);
+                if (post.getPostType().equals("url")) {
+                    post.setDescription(inputSplitter[4]);
+                }
                 socialMedia.getUserPosts().add(post);
                 System.out.println("Post " + post.getId() + " created.");
                 socialMedia.getNicknameTypeContentAndIdAboutPost();

@@ -11,6 +11,8 @@ public class UserPost {
 
     private String postType;
 
+    private String description;
+
     public UserPost(String nickname, String postType, String content) {
         this.nickname = nickname;
         this.content = content;
