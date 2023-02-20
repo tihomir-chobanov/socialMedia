@@ -8,6 +8,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.channels.FileChannel;
 
 @Getter
 @Setter
@@ -39,8 +40,22 @@ public class Regular extends AbstractUser {
     private static void viewPostById(SocialMedia socialMedia, int i) throws IOException {
         int postId = i + 1;
         System.out.println("HTML view for post " + postId + " created.");
-        String postContentFormatted = "";
+        String postContentFormatted = getPostContentFormatted(socialMedia, i);
 
+        try {
+            File myObj = new File("C:\\Users\\Tihomir Chobanov\\OneDrive - Foundation 0700\\Desktop\\view_post.html");
+            FileWriter fw = new FileWriter(myObj, false);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(postContentFormatted);
+            bw.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+    private static String getPostContentFormatted(SocialMedia socialMedia, int i) {
+        String postContentFormatted = "";
         if (socialMedia.getUserPosts().get(i).getPostType().equals("text")) {
             postContentFormatted = "<p>" + socialMedia.getUserPosts().get(i).getContent() + "</p>";
         } else if (socialMedia.getUserPosts().get(i).getPostType().equals("url")) {
@@ -49,22 +64,7 @@ public class Regular extends AbstractUser {
         } else {
             postContentFormatted = "<img src=\"" + socialMedia.getUserPosts().get(i).getContent() + "\">";
         }
-
-        try {
-            File myObj = new File("C:\\Users\\Tihomir Chobanov\\OneDrive - Foundation 0700\\Desktop\\index.html");
-            if (!myObj.createNewFile()) {
-                System.out.println("File already exists.");
-            }
-            FileWriter fw = new FileWriter(myObj, true); // true to append the text to the end of the file
-            BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(postContentFormatted);
-            bw.newLine(); // write a newline character to separate lines
-            bw.close();
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
-
+        return postContentFormatted;
     }
 
 

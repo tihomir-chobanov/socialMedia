@@ -20,25 +20,25 @@ public class Main {
 	    Kiril remove_post 8
 	    Kiril view_post 10
 	    Ivan view_all_posts Kolio
+
+	    CommandHandler - remove methoda v nov klas, kakto i drugite metodi i te v novi klasove;
+        BuilderPattern / Factory pattern;
+
+        Admin add_moderator John 50
+        Admin add_user Vasil 30
+        Admin remove_user Vasil
+        John rename Ivan
+        Ivan block Vasil
+        Vasil post image /home/kiril/img/hello.png
+        John view_post 2
+        Vasil post url https://github.com/tihomir-chobanov gitAccount
+        Admin post image C:\\socialMediaPhotos\\spices-cooking.jpg
          */
 
-        Scanner scanner = new Scanner(System.in);
 
+        Scanner scanner = new Scanner(System.in);
         SocialMedia socialMedia = new SocialMedia();
         socialMedia.getUsers().add(socialMedia.getAdministrator());
-
-        //CommandHandler - remove methoda v nov klas, kakto i drugite metodi i te v novi klasove;
-        //BuilderPattern / Factory pattern;
-
-        //     Admin add_moderator John 50
-        //     Admin add_user Vasil 30
-        //     Admin remove_user Vasil
-        //     John rename Ivan
-        //     Ivan block Vasil
-        //     Vasil post image /home/kiril/img/hello.png
-        //     John view_post 2
-        //     Vasil post url https://github.com/tihomir-chobanov gitAccount
-        //     John post image C:\\socialMediaPhotos\\spices-cooking.jpg
 
         while (true) {
             String input = getUserInput(scanner);

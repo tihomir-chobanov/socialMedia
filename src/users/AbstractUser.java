@@ -5,11 +5,16 @@ import socialMedia.SocialMedia;
 import userPost.UserPost;
 import util.Constants;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.zip.CheckedOutputStream;
+
 
 import static users.Moderator.getIndexOfUser;
+
 
 @Getter
 @Setter
@@ -36,17 +41,42 @@ public abstract class AbstractUser {
         boolean isSearchedUserInList = socialMedia.isUserInList(searchedUser);
 
         if (isActorInList && isSearchedUserInList ) {
-            for (AbstractUser u : socialMedia.getUsers()) {
-                if (u.getNickname().equals(searchedUser)) {
-                    System.out.println("HTML view for all " + searchedUser + "'s posts created.");
-                    for (UserPost p : u.getPersonalPostsList()) {
-                        System.out.println(p.getNickname() + " " + p.getContent() + " " + p.getId());
+            try {
+                File myObj = new File("C:\\Users\\Tihomir Chobanov\\OneDrive - Foundation 0700\\Desktop\\view_all_posts.html");
+                FileWriter fw = new FileWriter(myObj, false); // overwrite the file
+                BufferedWriter bw = new BufferedWriter(fw);
+                for (AbstractUser u : socialMedia.getUsers()) {
+                    if (u.getNickname().equals(searchedUser)) {
+                        System.out.println("HTML view for all " + searchedUser + "'s posts created.");
+                        for (UserPost p : u.getPersonalPostsList()) {
+                            String postContentFormatted =  getPostContentFormatted(p);
+                            bw.write(postContentFormatted);
+                            bw.newLine();
+                        }
                     }
                 }
+                bw.close();
+            } catch (IOException e) {
+                System.out.println("An error occurred.");
+                e.printStackTrace();
             }
         } else {
             System.out.println(Constants.USER_UNKNOWN);
         }
+    }
+
+
+    private static String getPostContentFormatted(UserPost p) {
+        String postContentFormatted = "";
+        if (p.getPostType().equals("text")) {
+            postContentFormatted = "<p>" + p.getContent() + "</p>";
+        } else if (p.getPostType().equals("url")) {
+            postContentFormatted = "<a href=\"" + p.getContent()
+                    + "\">" + p.getDescription() + "</a>";
+        } else {
+            postContentFormatted = "<img src=\"" + p.getContent() + "\">";
+        }
+        return postContentFormatted;
     }
 
     public static void addPost(SocialMedia socialMedia, String[] inputSplitter) {
