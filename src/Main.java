@@ -1,7 +1,6 @@
 import socialMedia.SocialMedia;
-import users.AbstractUser;
-import users.Moderator;
-import users.Regular;
+import util.PostUtil;
+import util.UserUtil;
 
 import java.io.IOException;
 import java.util.*;
@@ -47,19 +46,19 @@ public class Main {
                 return;
             }
             if (inputSplitter[0].equals("info")) {
-                socialMedia.info(socialMedia);
+                UserUtil.info(socialMedia);
             } else {
                 String command = inputSplitter[1];
                 switch (command) {
-                    case "add_moderator", "add_user" -> socialMedia.getAdministrator().addUser(socialMedia, inputSplitter, command);
-                    case "remove_user" -> socialMedia.getAdministrator().removeUser(socialMedia, inputSplitter);
-                    case "rename" -> socialMedia.changeNickname(socialMedia, inputSplitter);
-                    case "block" -> Moderator.blockUser(socialMedia, inputSplitter);
-                    case "unblock" -> Moderator.unblockUser(socialMedia, inputSplitter);
-                    case "post" -> Regular.addPost(socialMedia, inputSplitter);
-                    case "remove_post" -> Regular.removePost(socialMedia, inputSplitter);
-                    case "view_post" -> Regular.viewPost(socialMedia, inputSplitter);
-                    case "view_all_posts" -> AbstractUser.viewAllPostsByUser(socialMedia, inputSplitter);
+                    case "add_moderator", "add_user" -> UserUtil.addUser(socialMedia, inputSplitter, command);
+                    case "remove_user" -> UserUtil.removeUser(socialMedia, inputSplitter);
+                    case "rename" -> UserUtil.changeNickname(socialMedia, inputSplitter);
+                    case "block" -> UserUtil.blockOrUnblockUser(socialMedia, inputSplitter, true);
+                    case "unblock" -> UserUtil.blockOrUnblockUser(socialMedia, inputSplitter, false);
+                    case "post" -> PostUtil.addPost(socialMedia, inputSplitter);
+                    case "remove_post" -> PostUtil.removePost(socialMedia, inputSplitter);
+                    case "view_post" -> PostUtil.viewPost(socialMedia, inputSplitter);
+                    case "view_all_posts" -> PostUtil.viewAllPostsByUser(socialMedia, inputSplitter);
                 }
             }
         }

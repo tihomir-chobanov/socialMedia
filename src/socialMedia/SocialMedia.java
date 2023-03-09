@@ -1,11 +1,9 @@
 package socialMedia;
 import lombok.Getter;
 import lombok.Setter;
-import util.UserUtil;
 import userPost.UserPost;
 import users.AbstractUser;
 import users.Administrator;
-import util.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,21 +16,7 @@ public class SocialMedia {
     private List<AbstractUser> users = new ArrayList<>();
     private List<UserPost> userPosts = new ArrayList<>();
 
-    public AbstractUser getUserByNickname(SocialMedia socialMedia, String nickname) {
-        int indexOfUser = -1;
-        int i = 0;
-        for (AbstractUser user : socialMedia.getUsers()) {
-            if (user.getNickname().equals(nickname)) {
-                indexOfUser = i;
-                break;
-            }
-            i++;
-        }
-        if (indexOfUser == -1) {
-            System.out.println(Constants.USER_UNKNOWN);
-        }
-        return socialMedia.getUsers().get(indexOfUser);
-    }
+
 
     // combine the methods in one - deleting isUserInList affects 11 other usages!!!;
     public boolean isUserInList(String name) {
@@ -57,55 +41,5 @@ public class SocialMedia {
         return isNewNicknameUnique;
     }
 
-    public void changeNickname(SocialMedia socialMedia, String[] inputSplitter) {
-        String userToChange = inputSplitter[0];
-        String newNickname = inputSplitter[2];
-        boolean isUserToChangeInUsers = socialMedia.isUserInList(userToChange);
-        boolean isNewNickNameUnique =  socialMedia.isUserUnique(newNickname);
 
-        if (!isUserToChangeInUsers) System.out.println(Constants.USER_UNKNOWN);
-        if (!isNewNickNameUnique) System.out.println(Constants.NICKNAME_IS_USED);
-
-        if (isUserToChangeInUsers && isNewNickNameUnique) {
-            changeNicknameInUsers(userToChange, newNickname);
-            changeNicknameInUserPosts(userToChange, newNickname);
-            System.out.println("User " + userToChange + " is now known as " + newNickname + ".");
-            socialMedia.printNumberRoleNameAgeAndBlockAboutUsers();
-        }
-    }
-
-    private void changeNicknameInUserPosts(String userToChange, String newNickname) {
-        for (UserPost userPost : userPosts) {
-            if (userPost.getNickname().equals(userToChange))
-                userPost.setNickname(newNickname);
-        }
-    }
-
-    private void changeNicknameInUsers(String userToChange, String newNickname) {
-        for (AbstractUser user : users) {
-            if (user.getNickname().equals(userToChange)) {
-                user.setNickname(newNickname);
-            }
-        }
-    }
-
-    public void printNumberRoleNameAgeAndBlockAboutUsers() {
-        int number = 1;
-        for (AbstractUser user : users) {
-            System.out.println("User #" + number++ + ": " + user.getRole() + " " + user.getNickname() + " " + user.getAge() + " " + user.isBlocked());
-        }
-    }
-
-    public void printNicknameTypeContentAndIdAboutPost() {
-        for (UserPost userPost : userPosts) {
-            System.out.println(userPost.getNickname() + " " + userPost.getPostType() + " " + userPost.getContent() + " " + userPost.getId());
-        }
-    }
-
-    public void info(SocialMedia socialMedia) {
-        UserUtil.printNumberOfUsers(socialMedia);
-        UserUtil.printNameRoleNumberOfPostsAboutUsers(socialMedia);
-        UserUtil.printNumberOfBlockedUsers(socialMedia);
-        UserUtil.printOldestAndYoungestUsers(socialMedia);
-    }
 }
