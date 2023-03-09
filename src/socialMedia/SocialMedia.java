@@ -1,6 +1,7 @@
 package socialMedia;
 import lombok.Getter;
 import lombok.Setter;
+import util.UserUtil;
 import userPost.UserPost;
 import users.AbstractUser;
 import users.Administrator;
@@ -33,6 +34,7 @@ public class SocialMedia {
         return socialMedia.getUsers().get(indexOfUser);
     }
 
+    // combine the methods in one - deleting isUserInList affects 11 other usages!!!;
     public boolean isUserInList(String name) {
         boolean isUserInList = false;
         for (AbstractUser user: users) {
@@ -68,7 +70,7 @@ public class SocialMedia {
             changeNicknameInUsers(userToChange, newNickname);
             changeNicknameInUserPosts(userToChange, newNickname);
             System.out.println("User " + userToChange + " is now known as " + newNickname + ".");
-            socialMedia.getNumberRoleNameAgeAndBlockAboutUsers();
+            socialMedia.printNumberRoleNameAgeAndBlockAboutUsers();
         }
     }
 
@@ -87,64 +89,23 @@ public class SocialMedia {
         }
     }
 
-    public void getNumberRoleNameAgeAndBlockAboutUsers() {
+    public void printNumberRoleNameAgeAndBlockAboutUsers() {
         int number = 1;
         for (AbstractUser user : users) {
             System.out.println("User #" + number++ + ": " + user.getRole() + " " + user.getNickname() + " " + user.getAge() + " " + user.isBlocked());
         }
     }
 
-    public void getNumberOfBlockedUsers() {
-        int number = 0;
-        for (AbstractUser user : users) {
-            if (user.isBlocked()) {
-                number++;
-            }
-        }
-        System.out.println((number == 0) ? "There aren't any bloced users" : "There are " + number + " blocked users.");
-    }
-
-    public void getNameRoleNumberOfPostsAboutUsers() {
-        for (AbstractUser user : users) {
-            System.out.println(user.getNickname() + " - " + user.getRole() + ", " + user.getPersonalPostsList().size() + " posts.");
-        }
-    }
-
-    public void getNicknameTypeContentAndIdAboutPost() {
+    public void printNicknameTypeContentAndIdAboutPost() {
         for (UserPost userPost : userPosts) {
             System.out.println(userPost.getNickname() + " " + userPost.getPostType() + " " + userPost.getContent() + " " + userPost.getId());
         }
     }
 
-    public void getNumberOfUsers(SocialMedia socialMedia) {
-        int numberOfUsers = socialMedia.getUsers().size();
-        System.out.println("There are " + numberOfUsers + " users: ");
-    }
-
-    public void getOldestAndYoungestUsers(SocialMedia socialMedia) {
-        int maxAge = Integer.MIN_VALUE;
-        int minAge = Integer.MAX_VALUE;
-        AbstractUser oldestUser = null;
-        AbstractUser youngestUser = null;
-
-        for (AbstractUser user : socialMedia.getUsers()) {
-            if (user.getAge() > maxAge) {
-                maxAge = user.getAge();
-                oldestUser = user;
-            }
-            if (user.getAge() < minAge) {
-                minAge = user.getAge();
-                youngestUser = user;
-            }
-        }
-        System.out.println("oldest " + oldestUser.getNickname() + " " + oldestUser.getAge());
-        System.out.println("youngest " + youngestUser.getNickname() + " " + youngestUser.getAge());
-    }
-
     public void info(SocialMedia socialMedia) {
-        socialMedia.getNumberOfUsers(socialMedia);
-        socialMedia.getNameRoleNumberOfPostsAboutUsers();
-        socialMedia.getNumberOfBlockedUsers();
-        socialMedia.getOldestAndYoungestUsers(socialMedia);
+        UserUtil.printNumberOfUsers(socialMedia);
+        UserUtil.printNameRoleNumberOfPostsAboutUsers(socialMedia);
+        UserUtil.printNumberOfBlockedUsers(socialMedia);
+        UserUtil.printOldestAndYoungestUsers(socialMedia);
     }
 }

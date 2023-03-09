@@ -78,7 +78,7 @@ public abstract class AbstractUser {
         }
         return postContentFormatted;
     }
-
+    // i tozi metod v PostUtil da ide!
     public static void addPost(SocialMedia socialMedia, String[] inputSplitter) {
         String user = inputSplitter[0];
         String postType = inputSplitter[2];
@@ -94,7 +94,7 @@ public abstract class AbstractUser {
                 }
                 socialMedia.getUserPosts().add(post);
                 System.out.println("Post " + post.getId() + " created.");
-                socialMedia.getNicknameTypeContentAndIdAboutPost();
+                socialMedia.printNicknameTypeContentAndIdAboutPost();
                 socialMedia.getUserByNickname(socialMedia, user).getPersonalPostsList().add(post);
             } else {
                 System.out.println("Post not created - user blocked!");

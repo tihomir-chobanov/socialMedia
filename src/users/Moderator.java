@@ -13,6 +13,8 @@ public class Moderator extends Regular {
         super(role, nickname, age);
     }
 
+
+    // combine 2 methods in one with boolean true - block/ false - unblock
     public static void blockUser(SocialMedia socialMedia, String[] inputSplitter) {
         String blocker = inputSplitter[0];
         String blocked = inputSplitter[2];
@@ -25,11 +27,11 @@ public class Moderator extends Regular {
         if (!isBlockerInList || !isBlockedInList) {
             System.out.println(Constants.USER_UNKNOWN);
         } else {
-            if (socialMedia.getUsers().get(indexOfBlockerUser).getRole().equals("Moderator")
-                    || socialMedia.getUsers().get(indexOfBlockerUser).getRole().equals("Administrator")) {
+            if ("Moderator".equals(socialMedia.getUsers().get(indexOfBlockerUser).getRole())
+                    || "Administrator".equals(socialMedia.getUsers().get(indexOfBlockerUser).getRole())) {
                 socialMedia.getUsers().get(indexOfBlockedUser).setBlocked(true);
                 System.out.println(socialMedia.getUsers().get(indexOfBlockedUser).getNickname() + " blocked.");
-                socialMedia.getNumberRoleNameAgeAndBlockAboutUsers();
+                socialMedia.printNumberRoleNameAgeAndBlockAboutUsers();
             } else {
                 System.out.println(Constants.BLOCK_FORBIDDEN_FOR_REGULARS);
             }
@@ -48,11 +50,11 @@ public class Moderator extends Regular {
         if (!isBlockerInList || !isBlockedInList) {
             System.out.println(Constants.USER_UNKNOWN);
         } else {
-            if (socialMedia.getUsers().get(indexOfBlockerUser).getRole().equals("Moderator")
-                    || socialMedia.getUsers().get(indexOfBlockerUser).getRole().equals("Administrator")) {
+            if ("Moderator".equals(socialMedia.getUsers().get(indexOfBlockerUser).getRole())
+                    || "Administrator".equals(socialMedia.getUsers().get(indexOfBlockerUser).getRole())) {
                 socialMedia.getUsers().get(indexOfBlockedUser).setBlocked(false);
                 System.out.println(Constants.USER_IS_UNBLOCKED);
-                socialMedia.getNumberRoleNameAgeAndBlockAboutUsers();
+                socialMedia.printNumberRoleNameAgeAndBlockAboutUsers();
             } else {
                 System.out.println(Constants.BLOCK_FORBIDDEN_FOR_REGULARS);
             }

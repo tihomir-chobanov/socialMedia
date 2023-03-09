@@ -26,7 +26,7 @@ public class Administrator extends Moderator {
                 System.out.println(nameFromInput + " created.");
             }
             socialMedia.getUsers().add(user);
-            socialMedia.getNumberRoleNameAgeAndBlockAboutUsers();
+            socialMedia.printNumberRoleNameAgeAndBlockAboutUsers();
         } else {
             System.out.println("No such user: " + actor + "!");
         }
@@ -50,14 +50,14 @@ public class Administrator extends Moderator {
     private static void removeFromUserPosts(SocialMedia socialMedia, String userToRemove) {
         socialMedia.getUserPosts().removeIf(post -> post.getNickname().equals(userToRemove));
         System.out.println(Constants.USERPOSTS_AFTER_REMOVING);
-        socialMedia.getNicknameTypeContentAndIdAboutPost();
+        socialMedia.printNicknameTypeContentAndIdAboutPost();
     }
 
     private static void removeFromUsers(SocialMedia socialMedia, String userToRemove) {
         socialMedia.getUsers().removeIf(user -> user.getNickname().equals(userToRemove));
         System.out.println(userToRemove + " removed.");
         System.out.println(Constants.USERLIST_AFTER_REMOVING);
-        socialMedia.getNumberRoleNameAgeAndBlockAboutUsers();
+        socialMedia.printNumberRoleNameAgeAndBlockAboutUsers();
     }
 }
 
