@@ -11,21 +11,27 @@ public class UserUtil {
 
     public static void addUser(SocialMedia socialMedia, String[] inputSplitter, String userType) {
         String actor = inputSplitter[0];
-        if (actor.equals(socialMedia.getAdministrator().getNickname())) {
-            String nameFromInput = inputSplitter[2];
-            int ageFromInput = Integer.parseInt(inputSplitter[3]);
-            AbstractUser user = null;
-            if (userType.equals("add_moderator")) {
-                user = new Moderator("Moderator", nameFromInput, ageFromInput);
-                System.out.println(nameFromInput + " created.");
-            } else if (userType.equals("add_user")) {
-                user = new Regular("Regular", nameFromInput, ageFromInput);
-                System.out.println(nameFromInput + " created.");
-            }
+        String nameOfUserToAdd = inputSplitter[2];
+        if (socialMedia.isUserInList(nameOfUserToAdd)) {
+            System.out.println(Constants.NICKNAME_IS_USED);
+            return;
+        }
+        if (!actor.equals(socialMedia.getAdministrator().getNickname())) {
+            System.out.println(Constants.USER_UNKNOWN);
+            return;
+        }
+        String nameFromInput = inputSplitter[2];
+        int ageFromInput = Integer.parseInt(inputSplitter[3]);
+        AbstractUser user = null;
+        if (userType.equals("add_moderator")) {
+            user = new Moderator("Moderator", nameFromInput, ageFromInput);
+        } else if (userType.equals("add_user")) {
+            user = new Regular("Regular", nameFromInput, ageFromInput);
+        }
+        if (user != null) {
             socialMedia.getUsers().add(user);
+            System.out.println(nameFromInput + " created.");
             UserUtil.printNumberRoleNameAgeAndBlockAboutUsers(socialMedia);
-        } else {
-            System.out.println("No such user: " + actor + "!");
         }
     }
 

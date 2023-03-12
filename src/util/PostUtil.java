@@ -81,9 +81,9 @@ public class PostUtil {
         int postId = i + 1;
         System.out.println("HTML view for post " + postId + " created.");
         String postContentFormatted = getPostContentFormatted(socialMedia, i);
-        // view_post rename userName_postNumber
         try {
-            File myObj = new File("C:\\Users\\Tihomir Chobanov\\OneDrive - Foundation 0700\\Desktop\\view_post.html");
+            String fileName = socialMedia.getUserPosts().get(i).getNickname() + "_" + postId;
+            File myObj = new File("C:\\Users\\Tihomir Chobanov\\OneDrive - Foundation 0700\\Desktop\\" + fileName + ".html");
             FileWriter fw = new FileWriter(myObj, false);
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write(postContentFormatted);

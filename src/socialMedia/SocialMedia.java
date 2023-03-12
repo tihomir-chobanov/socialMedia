@@ -17,17 +17,8 @@ public class SocialMedia {
     private List<UserPost> userPosts = new ArrayList<>();
 
 
-
-    // combine the methods in one - deleting isUserInList affects 11 other usages!!!;
     public boolean isUserInList(String name) {
-        boolean isUserInList = false;
-        for (AbstractUser user: users) {
-            if (user.getNickname().equals(name)) {
-                isUserInList = true;
-                break;
-            }
-        }
-        return isUserInList;
+        return !isUserUnique(name);
     }
 
     public boolean isUserUnique(String newNickname) {
