@@ -23,9 +23,8 @@ public class PostUtil {
         if (isUserInList) {
             if (!socialMedia.getUsers().get(indexOfUser).isBlocked()) {
                 UserPost post = new UserPost(user, postType, postContent);
-                if (post.getPostType().equals("url")) {
-                    post.setDescription(inputSplitter[4]);
-                }
+                setContentIfPostIsText(inputSplitter, post);
+                setDescriptionIfPostIsUrl(inputSplitter, post);
                 socialMedia.getUserPosts().add(post);
                 System.out.println("Post " + post.getId() + " created.");
                 PostUtil.printNicknameTypeContentAndIdAboutPost(socialMedia);
@@ -35,6 +34,30 @@ public class PostUtil {
             }
         } else {
             System.out.println(Constants.USER_UNKNOWN);
+        }
+    }
+
+    private static void setDescriptionIfPostIsUrl(String[] inputSplitter, UserPost post) {
+        if (post.getPostType().equals("url")) {
+            boolean foundHttp = false;
+            StringBuilder stringBuilder = new StringBuilder();
+            for (String str : inputSplitter) {
+                if (foundHttp) {
+                    stringBuilder.append(str).append(" ");
+                } else if (str.startsWith("http")) {
+                    foundHttp = true;
+                }
+            }
+            String postDescrForUrlPosts = stringBuilder.toString().trim();
+            post.setDescription(postDescrForUrlPosts);
+        }
+    }
+
+    private static void setContentIfPostIsText(String[] inputSplitter, UserPost post) {
+        if (post.getPostType().equals("text")) {
+            String inputSplitterToString = String.join(" ", inputSplitter);
+            String postContentForTextPosts = inputSplitterToString.substring(inputSplitterToString.indexOf("text") + 5);
+            post.setContent(postContentForTextPosts);
         }
     }
 
@@ -128,8 +151,9 @@ public class PostUtil {
 
         if (isActorInList && isSearchedUserInList ) {
             try {
-                File myObj = new File("C:\\Users\\Tihomir Chobanov\\OneDrive - Foundation 0700\\Desktop\\view_all_posts.html");
-                FileWriter fw = new FileWriter(myObj, false); // overwrite the file
+                String fileName = searchedUser + "'s_posts";
+                File myObj = new File("C:\\Users\\Tihomir Chobanov\\OneDrive - Foundation 0700\\Desktop\\" + fileName + ".html");
+                FileWriter fw = new FileWriter(myObj, false);
                 BufferedWriter bw = new BufferedWriter(fw);
                 for (AbstractUser u : socialMedia.getUsers()) {
                     if (u.getNickname().equals(searchedUser)) {

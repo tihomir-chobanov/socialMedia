@@ -30,7 +30,7 @@ public class Main {
         Ivan block Vasil
         Vasil post image /home/kiril/img/hello.png
         John view_post 2
-        Vasil post url https://github.com/tihomir-chobanov gitAccount
+        Vasil post url https://github.com/tihomir-chobanov this is my gitAccount
         Admin post image C:\\socialMediaPhotos\\spices-cooking.jpg
          */
 
