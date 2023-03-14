@@ -12,7 +12,7 @@ public class UserUtil {
     public static void addUser(SocialMedia socialMedia, String[] inputSplitter, String userType) {
         String actor = inputSplitter[0];
         String nameOfUserToAdd = inputSplitter[2];
-        if (socialMedia.isUserInList(nameOfUserToAdd)) {
+        if (UserUtil.isUserInList(nameOfUserToAdd, socialMedia)) {
             System.out.println(Constants.NICKNAME_IS_USED);
             return;
         }
@@ -35,11 +35,20 @@ public class UserUtil {
         }
     }
 
+    public static boolean isUserInList(String name, SocialMedia socialMedia) {
+        for (AbstractUser user : socialMedia.getUsers()) {
+            if (user.getNickname().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static void removeUser(SocialMedia socialMedia, String[] inputSplitter) {
         if (inputSplitter[0].equals(socialMedia.getAdministrator().getNickname())) {
             String userToRemove = inputSplitter[2];
-            socialMedia.isUserInList(userToRemove);
-            if (socialMedia.isUserInList(userToRemove)) {
+            UserUtil.isUserInList(userToRemove, socialMedia);
+            if (UserUtil.isUserInList(userToRemove, socialMedia)) {
                 removeFromUserPosts(socialMedia, userToRemove);
                 removeFromUsers(socialMedia, userToRemove);
             } else {
@@ -66,8 +75,8 @@ public class UserUtil {
     public static void changeNickname(SocialMedia socialMedia, String[] inputSplitter) {
         String userToChange = inputSplitter[0];
         String newNickname = inputSplitter[2];
-        boolean isUserToChangeInUsers = socialMedia.isUserInList(userToChange);
-        boolean isNewNickNameUnique =  !socialMedia.isUserInList(newNickname);
+        boolean isUserToChangeInUsers = UserUtil.isUserInList(userToChange, socialMedia);
+        boolean isNewNickNameUnique =  !UserUtil.isUserInList(newNickname, socialMedia);
 
         if (!isUserToChangeInUsers) System.out.println(Constants.USER_UNKNOWN);
         if (!isNewNickNameUnique) System.out.println(Constants.NICKNAME_IS_USED);
@@ -139,8 +148,8 @@ public class UserUtil {
     public static void blockOrUnblockUser(SocialMedia socialMedia, String[] inputSplitter, boolean shouldBlock) {
         String blocker = inputSplitter[0];
         String blocked = inputSplitter[2];
-        boolean isBlockerInList = socialMedia.isUserInList(blocker);
-        boolean isBlockedInList = socialMedia.isUserInList(blocked);
+        boolean isBlockerInList = UserUtil.isUserInList(blocker, socialMedia);
+        boolean isBlockedInList = UserUtil.isUserInList(blocked, socialMedia);
 
         int indexOfBlockerUser = getIndexOfUser(socialMedia, blocker);
         int indexOfBlockedUser = getIndexOfUser(socialMedia, blocked);

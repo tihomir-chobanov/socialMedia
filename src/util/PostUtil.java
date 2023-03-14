@@ -17,7 +17,7 @@ public class PostUtil {
         String user = inputSplitter[0];
         String postType = inputSplitter[2];
         String postContent = inputSplitter[3];
-        boolean isUserInList = socialMedia.isUserInList(user);
+        boolean isUserInList = UserUtil.isUserInList(user, socialMedia);
         int indexOfUser = getIndexOfUser(socialMedia, user);
 
         if (isUserInList) {
@@ -63,7 +63,7 @@ public class PostUtil {
 
     public static void removePost(SocialMedia socialMedia, String[] inputSplitter) {
         String actor = inputSplitter[0];
-        boolean isActorInList = socialMedia.isUserInList(actor);
+        boolean isActorInList = UserUtil.isUserInList(actor, socialMedia);
         int postNumber = Integer.parseInt(inputSplitter[2]);
 
         if (isActorInList) {
@@ -83,7 +83,7 @@ public class PostUtil {
 
     public static void viewPost(SocialMedia socialMedia, String[] inputSplitter) throws IOException {
         String actor = inputSplitter[0];
-        boolean isActorInList = socialMedia.isUserInList(actor);
+        boolean isActorInList = UserUtil.isUserInList(actor, socialMedia);
         int postNumber = Integer.parseInt(inputSplitter[2]);
 
         if (isActorInList) {
@@ -146,8 +146,8 @@ public class PostUtil {
     public static void viewAllPostsByUser(SocialMedia socialMedia, String[] inputSplitter) {
         String actor = inputSplitter[0];
         String searchedUser = inputSplitter[2];
-        boolean isActorInList = socialMedia.isUserInList(actor);
-        boolean isSearchedUserInList = socialMedia.isUserInList(searchedUser);
+        boolean isActorInList = UserUtil.isUserInList(actor, socialMedia);
+        boolean isSearchedUserInList = UserUtil.isUserInList(searchedUser, socialMedia);
 
         if (isActorInList && isSearchedUserInList ) {
             try {

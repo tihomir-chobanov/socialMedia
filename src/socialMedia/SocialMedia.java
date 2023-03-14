@@ -17,14 +17,7 @@ public class SocialMedia {
     private List<UserPost> userPosts = new ArrayList<>();
 
 
-    public boolean isUserInList(String name) {
-        for (AbstractUser user : users) {
-            if (user.getNickname().equals(name)) {
-                return true;
-            }
-        }
-        return false;
-    }
+
 
 
 
