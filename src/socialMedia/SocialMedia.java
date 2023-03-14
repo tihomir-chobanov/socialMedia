@@ -18,19 +18,15 @@ public class SocialMedia {
 
 
     public boolean isUserInList(String name) {
-        return !isUserUnique(name);
-    }
-
-    public boolean isUserUnique(String newNickname) {
-        boolean isNewNicknameUnique = true;
         for (AbstractUser user : users) {
-            if (user.getNickname().equals(newNickname)) {
-                isNewNicknameUnique = false;
-                break;
+            if (user.getNickname().equals(name)) {
+                return true;
             }
         }
-        return isNewNicknameUnique;
+        return false;
     }
+
+
 
 
 }
