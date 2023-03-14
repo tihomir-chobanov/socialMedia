@@ -67,7 +67,7 @@ public class UserUtil {
         String userToChange = inputSplitter[0];
         String newNickname = inputSplitter[2];
         boolean isUserToChangeInUsers = socialMedia.isUserInList(userToChange);
-        boolean isNewNickNameUnique =  socialMedia.isUserUnique(newNickname);
+        boolean isNewNickNameUnique =  !socialMedia.isUserInList(newNickname);
 
         if (!isUserToChangeInUsers) System.out.println(Constants.USER_UNKNOWN);
         if (!isNewNickNameUnique) System.out.println(Constants.NICKNAME_IS_USED);
