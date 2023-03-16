@@ -148,72 +148,78 @@ public class UserUtil {
     public static void blockOrUnblockUser(SocialMedia socialMedia, String[] inputSplitter, boolean shouldBlock) {
         String blocker = inputSplitter[0];
         String blocked = inputSplitter[2];
-        boolean isBlockerInList = UserUtil.isUserInList(blocker, socialMedia);
-        boolean isBlockedInList = UserUtil.isUserInList(blocked, socialMedia);
 
-        int indexOfBlockerUser = getIndexOfUser(socialMedia, blocker);
-        int indexOfBlockedUser = getIndexOfUser(socialMedia, blocked);
+        AbstractUser blockerUser = UserUtil.getUserByNickname(socialMedia, blocker);
+        AbstractUser blockedUser = UserUtil.getUserByNickname(socialMedia, blocked);
 
-        if (blockUnblockAdmin(socialMedia, blocked)) return;
-        if (blockedUserCanNotBlockOrUnblock(socialMedia, indexOfBlockerUser)) return;
-
-        if (!isBlockerInList || !isBlockedInList) {
+        if (blockerUser == null || blockedUser == null) {
             System.out.println(Constants.USER_UNKNOWN);
+            return;
+        }
+
+        if (blockUnblockAdmin(blockedUser) || blockedUserCannotBlockOrUnblock(blockerUser) ) {
+            return;
+        }
+
+        if (!isModeratorOrAdmin(blockerUser)) {
+            System.out.println(Constants.BLOCK_FORBIDDEN_FOR_REGULARS);
+            return;
+        }
+
+        if (userAlreadyBlockedOrUnblocked(shouldBlock, blockedUser)
+                || userBlocksThemselves(shouldBlock, blockerUser, blockedUser)) {
+            return;
+        }
+
+        blockedUser.setBlocked(shouldBlock);
+
+        if (shouldBlock) {
+            System.out.println("You blocked " + blockedUser.getNickname() + "!");
         } else {
-            if ("Moderator".equals(socialMedia.getUsers().get(indexOfBlockerUser).getRole())
-                    || "Administrator".equals(socialMedia.getUsers().get(indexOfBlockerUser).getRole())) {
-                if (userIsAlreadyBlocked(socialMedia, shouldBlock, indexOfBlockedUser)) return;
-                if (userIsAlreadyUnblocked(socialMedia, shouldBlock, indexOfBlockedUser)) return;
-                if (userCanNotBlockHimself(shouldBlock, indexOfBlockerUser, indexOfBlockedUser)) return;
-                socialMedia.getUsers().get(indexOfBlockedUser).setBlocked(shouldBlock);
-                if (shouldBlock) {
-                    System.out.println("You blocked " + socialMedia.getUsers().get(indexOfBlockedUser).getNickname() + "!");
-                } else {
-                    System.out.println(Constants.USER_IS_UNBLOCKED);
-                }
-                UserUtil.printNumberRoleNameAgeAndBlockAboutUsers(socialMedia);
+            System.out.println(Constants.USER_IS_UNBLOCKED);
+        }
+
+        UserUtil.printNumberRoleNameAgeAndBlockAboutUsers(socialMedia);
+    }
+
+
+    private static boolean userAlreadyBlockedOrUnblocked(boolean shouldBlock, AbstractUser blockedUser) {
+        if (blockedUser.isBlocked() == shouldBlock) {
+            if (shouldBlock) {
+                System.out.println(blockedUser.getNickname() + Constants.USER_IS_ALREADY_BLOCKED);
             } else {
-                System.out.println(Constants.BLOCK_FORBIDDEN_FOR_REGULARS);
+                System.out.println(blockedUser.getNickname() + Constants.USER_IS_ALREADY_UNBLOCKED);
             }
-        }
-    }
-
-    private static boolean blockedUserCanNotBlockOrUnblock(SocialMedia socialMedia, int indexOfBlockerUser) {
-        if (socialMedia.getUsers().get(indexOfBlockerUser).isBlocked()) {
-            System.out.println("You are blocked and can not block/unblock!");
             return true;
         }
         return false;
     }
 
 
-    private static boolean userCanNotBlockHimself(boolean shouldBlock, int indexOfBlockerUser, int indexOfBlockedUser) {
-        if (indexOfBlockerUser == indexOfBlockedUser && shouldBlock) {
-            System.out.println(Constants.USER_CAN_NOT_BLOCK_HIMSELF);
+    private static boolean isModeratorOrAdmin(AbstractUser user) {
+        return user.getRole().equals("Moderator") || user.getRole().equals("Administrator");
+    }
+
+
+    private static boolean blockedUserCannotBlockOrUnblock(AbstractUser blockerUser) {
+        if (blockerUser.isBlocked() && !blockerUser.getRole().equals("Moderator")) {
+            System.out.println(Constants.BLOCK_FORBIDDEN_FOR_BLOCKED_USERS);
             return true;
         }
         return false;
     }
 
-    private static boolean blockUnblockAdmin(SocialMedia socialMedia, String blocked) {
-        if (blocked.equals(socialMedia.getAdministrator().getNickname())) {
+    private static boolean userBlocksThemselves(boolean shouldBlock, AbstractUser blockerUser, AbstractUser blockedUser) {
+        if (shouldBlock && blockerUser.equals(blockedUser)) {
+            System.out.println(Constants.USER_CAN_NOT_BLOCK_THEMSELF);
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean blockUnblockAdmin(AbstractUser blockedUser) {
+        if (blockedUser.getRole().equals("Administrator")) {
             System.out.println(Constants.BLOCK_UNBLOCK_ADMIN);
-            return true;
-        }
-        return false;
-    }
-
-    private static boolean userIsAlreadyUnblocked(SocialMedia socialMedia, boolean shouldBlock, int indexOfBlockedUser) {
-        if (!socialMedia.getUsers().get(indexOfBlockedUser).isBlocked() && !shouldBlock) {
-            System.out.println(Constants.USER_IS_ALREADY_UNBLOCKED);
-            return true;
-        }
-        return false;
-    }
-
-    private static boolean userIsAlreadyBlocked(SocialMedia socialMedia, boolean shouldBlock, int indexOfBlockedUser) {
-        if (socialMedia.getUsers().get(indexOfBlockedUser).isBlocked() && shouldBlock) {
-            System.out.println(Constants.USER_IS_ALREADY_BLOCKED);
             return true;
         }
         return false;
@@ -241,9 +247,11 @@ public class UserUtil {
             i++;
         }
         if (indexOfUser == -1) {
-            System.out.println(Constants.USER_UNKNOWN);
+            return null;
+        } else {
+            return socialMedia.getUsers().get(indexOfUser);
         }
-        return socialMedia.getUsers().get(indexOfUser);
+
     }
 
     public static void printNumberRoleNameAgeAndBlockAboutUsers(SocialMedia socialMedia) {

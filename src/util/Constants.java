@@ -12,9 +12,9 @@ public class Constants {
     public static final String NICKNAME_IS_USED = "The nickname is already used in this socialMedia!";
     public static final String POST_IS_REMOVED = "Post is removed!";
     public static final String BLOCK_UNBLOCK_ADMIN = "You can not block/unblock Admin!";
+    public static final String USER_IS_ALREADY_BLOCKED = " is already blocked!";
+    public static final String USER_IS_ALREADY_UNBLOCKED = " is already unblocked!";
+    public static final String USER_CAN_NOT_BLOCK_THEMSELF = "User can not block themself!";
+    public static final String BLOCK_FORBIDDEN_FOR_BLOCKED_USERS = "You are blocked and can not block/unblock!";
 
-    public static final String USER_IS_ALREADY_BLOCKED = "User is already blocked!";
-    public static final String USER_IS_ALREADY_UNBLOCKED = "User is already unblocked!";
-    public static final String USER_CAN_NOT_BLOCK_HIMSELF = "User can not block himself!";
-    public static final String MODERATOR_CAN_NOT_BLOCK_ADMIN = "Moderator can not block Admin!";
 }
