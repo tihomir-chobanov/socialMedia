@@ -76,7 +76,7 @@ public class UserUtil {
         String userToChange = inputSplitter[0];
         String newNickname = inputSplitter[2];
         boolean isUserToChangeInUsers = UserUtil.isUserInList(userToChange, socialMedia);
-        boolean isNewNickNameUnique =  !UserUtil.isUserInList(newNickname, socialMedia);
+        boolean isNewNickNameUnique = !UserUtil.isUserInList(newNickname, socialMedia);
 
         if (!isUserToChangeInUsers) System.out.println(Constants.USER_UNKNOWN);
         if (!isNewNickNameUnique) System.out.println(Constants.NICKNAME_IS_USED);
@@ -154,14 +154,20 @@ public class UserUtil {
         int indexOfBlockerUser = getIndexOfUser(socialMedia, blocker);
         int indexOfBlockedUser = getIndexOfUser(socialMedia, blocked);
 
+        if (blockUnblockAdmin(socialMedia, blocked)) return;
+        if (blockedUserCanNotBlockOrUnblock(socialMedia, indexOfBlockerUser)) return;
+
         if (!isBlockerInList || !isBlockedInList) {
             System.out.println(Constants.USER_UNKNOWN);
         } else {
             if ("Moderator".equals(socialMedia.getUsers().get(indexOfBlockerUser).getRole())
                     || "Administrator".equals(socialMedia.getUsers().get(indexOfBlockerUser).getRole())) {
+                if (userIsAlreadyBlocked(socialMedia, shouldBlock, indexOfBlockedUser)) return;
+                if (userIsAlreadyUnblocked(socialMedia, shouldBlock, indexOfBlockedUser)) return;
+                if (userCanNotBlockHimself(shouldBlock, indexOfBlockerUser, indexOfBlockedUser)) return;
                 socialMedia.getUsers().get(indexOfBlockedUser).setBlocked(shouldBlock);
                 if (shouldBlock) {
-                    System.out.println(socialMedia.getUsers().get(indexOfBlockedUser).getNickname() + " blocked.");
+                    System.out.println("You blocked " + socialMedia.getUsers().get(indexOfBlockedUser).getNickname() + "!");
                 } else {
                     System.out.println(Constants.USER_IS_UNBLOCKED);
                 }
@@ -170,6 +176,47 @@ public class UserUtil {
                 System.out.println(Constants.BLOCK_FORBIDDEN_FOR_REGULARS);
             }
         }
+    }
+
+    private static boolean blockedUserCanNotBlockOrUnblock(SocialMedia socialMedia, int indexOfBlockerUser) {
+        if (socialMedia.getUsers().get(indexOfBlockerUser).isBlocked()) {
+            System.out.println("You are blocked and can not block/unblock!");
+            return true;
+        }
+        return false;
+    }
+
+
+    private static boolean userCanNotBlockHimself(boolean shouldBlock, int indexOfBlockerUser, int indexOfBlockedUser) {
+        if (indexOfBlockerUser == indexOfBlockedUser && shouldBlock) {
+            System.out.println(Constants.USER_CAN_NOT_BLOCK_HIMSELF);
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean blockUnblockAdmin(SocialMedia socialMedia, String blocked) {
+        if (blocked.equals(socialMedia.getAdministrator().getNickname())) {
+            System.out.println(Constants.BLOCK_UNBLOCK_ADMIN);
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean userIsAlreadyUnblocked(SocialMedia socialMedia, boolean shouldBlock, int indexOfBlockedUser) {
+        if (!socialMedia.getUsers().get(indexOfBlockedUser).isBlocked() && !shouldBlock) {
+            System.out.println(Constants.USER_IS_ALREADY_UNBLOCKED);
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean userIsAlreadyBlocked(SocialMedia socialMedia, boolean shouldBlock, int indexOfBlockedUser) {
+        if (socialMedia.getUsers().get(indexOfBlockedUser).isBlocked() && shouldBlock) {
+            System.out.println(Constants.USER_IS_ALREADY_BLOCKED);
+            return true;
+        }
+        return false;
     }
 
     public static int getIndexOfUser(SocialMedia socialMedia, String user) {

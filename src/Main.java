@@ -73,3 +73,11 @@ public class Main {
         return scanner.nextLine();
     }
 }
+
+/*
+1.ne mojesh da blokirash/otblokirash admin - gotovo
+2.ne mojesh povtorno da blokirash blokiran potrebitel. It's already blocked/unblocked - gotovo
+3.ako ne e blokiran i iskash da go otblokirash - tova se pokriva ot gornoto, t.e. ne e nujen nov kod
+4.user, koito e moderator ne moje da blokira sebe si, no moje da se otblokira - gotovo
+5.usera e regular, nqma pravo da blokira ili otblokira - gotovo
+ */

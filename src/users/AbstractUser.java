@@ -3,12 +3,6 @@ import lombok.Getter;
 import lombok.Setter;
 import socialMedia.SocialMedia;
 import userPost.UserPost;
-import util.Constants;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
