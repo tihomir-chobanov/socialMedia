@@ -20,17 +20,17 @@ public class UserUtil {
             System.out.println(Constants.USER_UNKNOWN);
             return;
         }
-        String nameFromInput = inputSplitter[2];
+
         int ageFromInput = Integer.parseInt(inputSplitter[3]);
         AbstractUser user = null;
         if (userType.equals("add_moderator")) {
-            user = new Moderator("Moderator", nameFromInput, ageFromInput);
+            user = new Moderator("Moderator", nameOfUserToAdd, ageFromInput);
         } else if (userType.equals("add_user")) {
-            user = new Regular("Regular", nameFromInput, ageFromInput);
+            user = new Regular("Regular", nameOfUserToAdd, ageFromInput);
         }
         if (user != null) {
             socialMedia.getUsers().add(user);
-            System.out.println(nameFromInput + " created.");
+            System.out.println(nameOfUserToAdd + " created.");
             UserUtil.printNumberRoleNameAgeAndBlockAboutUsers(socialMedia);
         }
     }
@@ -125,7 +125,9 @@ public class UserUtil {
                 youngestUser = user;
             }
         }
+        assert oldestUser != null;
         System.out.println("oldest " + oldestUser.getNickname() + " " + oldestUser.getAge());
+        assert youngestUser != null;
         System.out.println("youngest " + youngestUser.getNickname() + " " + youngestUser.getAge());
     }
 
