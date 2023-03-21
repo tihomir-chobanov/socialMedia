@@ -1,3 +1,4 @@
+import executor.CommandHandler;
 import socialMedia.SocialMedia;
 import util.PostUtil;
 import util.UserUtil;
@@ -37,6 +38,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         SocialMedia socialMedia = new SocialMedia();
         socialMedia.getUsers().add(socialMedia.getAdministrator());
+        CommandHandler handler = new CommandHandler();
 
         while (true) {
             String input = getUserInput(scanner);
@@ -48,17 +50,22 @@ public class Main {
                 UserUtil.info(socialMedia);
             } else {
                 String command = inputSplitter[1];
-                switch (command) {
-                    case "add_moderator", "add_user" -> UserUtil.addUser(socialMedia, inputSplitter, command);
+                try {
+                    handler.handle(command, socialMedia, inputSplitter);
+                } catch (Exception e) {
+                    System.out.println("Please enter a valid command");
+                }
+/*                switch (command) {
+                 --   case "add_moderator", "add_user" -> UserUtil.addUser(socialMedia, inputSplitter, command);
+                 --   case "block" -> UserUtil.blockOrUnblockUser(socialMedia, inputSplitter, true);
+                 --   case "unblock" -> UserUtil.blockOrUnblockUser(socialMedia, inputSplitter, false);
                     case "remove_user" -> UserUtil.removeUser(socialMedia, inputSplitter);
                     case "rename" -> UserUtil.changeNickname(socialMedia, inputSplitter);
-                    case "block" -> UserUtil.blockOrUnblockUser(socialMedia, inputSplitter, true);
-                    case "unblock" -> UserUtil.blockOrUnblockUser(socialMedia, inputSplitter, false);
                     case "post" -> PostUtil.addPost(socialMedia, inputSplitter);
                     case "remove_post" -> PostUtil.removePost(socialMedia, inputSplitter);
                     case "view_post" -> PostUtil.viewPost(socialMedia, inputSplitter);
                     case "view_all_posts" -> PostUtil.viewAllPostsByUser(socialMedia, inputSplitter);
-                }
+                }*/
             }
         }
     }
