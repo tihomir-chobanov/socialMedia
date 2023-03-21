@@ -1,6 +1,5 @@
 import executor.CommandHandler;
 import socialMedia.SocialMedia;
-import util.PostUtil;
 import util.UserUtil;
 
 import java.io.IOException;
@@ -55,17 +54,6 @@ public class Main {
                 } catch (Exception e) {
                     System.out.println("Please enter a valid command");
                 }
-/*                switch (command) {
-                 --   case "add_moderator", "add_user" -> UserUtil.addUser(socialMedia, inputSplitter, command);
-                 --   case "block" -> UserUtil.blockOrUnblockUser(socialMedia, inputSplitter, true);
-                 --   case "unblock" -> UserUtil.blockOrUnblockUser(socialMedia, inputSplitter, false);
-                    case "remove_user" -> UserUtil.removeUser(socialMedia, inputSplitter);
-                    case "rename" -> UserUtil.changeNickname(socialMedia, inputSplitter);
-                    case "post" -> PostUtil.addPost(socialMedia, inputSplitter);
-                    case "remove_post" -> PostUtil.removePost(socialMedia, inputSplitter);
-                    case "view_post" -> PostUtil.viewPost(socialMedia, inputSplitter);
-                    case "view_all_posts" -> PostUtil.viewAllPostsByUser(socialMedia, inputSplitter);
-                }*/
             }
         }
     }

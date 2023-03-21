@@ -19,6 +19,10 @@ public class CommandHandler {
         this.commands.put("remove_post", new RemovePostCommand());
         this.commands.put("view_post", new ViewPostCommand());
         this.commands.put("view_all_posts", new ViewAllPostsCommand());
+        this.commands.put("add_user", new AddUserCommand());
+        this.commands.put("add_moderator", new AddModeratorCommand());
+        this.commands.put("block", new BlockUserCommand());
+        this.commands.put("unblock", new UnblockUserCommand());
     }
 
     public void handle(String value, SocialMedia socialMedia, String[] inputSplitter) throws IOException {
